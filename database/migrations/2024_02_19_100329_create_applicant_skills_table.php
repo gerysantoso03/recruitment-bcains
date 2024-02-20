@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('departments', function (Blueprint $table) {
+        Schema::create('applicant_skills', function (Blueprint $table) {
             $table->id();
-            $table->string('department_name');
-            $table->string('department_head');
-            $table->foreignId('division_id');
+            $table->text('languages');
+            $table->text('computers');
+            $table->text('organizations');
+            $table->foreignId('applicant_id');
             $table->timestamps();
         });
     }
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('departments');
+        Schema::dropIfExists('applicant_skills');
     }
 };

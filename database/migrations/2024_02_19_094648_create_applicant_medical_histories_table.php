@@ -11,11 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('departments', function (Blueprint $table) {
+        Schema::create('applicant_medical_histories', function (Blueprint $table) {
             $table->id();
-            $table->string('department_name');
-            $table->string('department_head');
-            $table->foreignId('division_id');
+            $table->string('illness_name');
+            $table->date('illness_date');
+            $table->text('illness_impact');
+            $table->text('remarks');
+            $table->foreignId('applicant_id');
             $table->timestamps();
         });
     }
@@ -25,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('departments');
+        Schema::dropIfExists('applicant_medical_histories');
     }
 };

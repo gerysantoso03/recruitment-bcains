@@ -18,6 +18,9 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('role')->default('HCBCAinsurance');
+            $table->integer('use_active_directory')->nullable();
+            $table->string('username_active_directory')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

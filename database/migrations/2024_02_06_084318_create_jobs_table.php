@@ -14,14 +14,13 @@ return new class extends Migration
     {
         Schema::create('jobs', function (Blueprint $table) {
             $table->id();
-            $table->string('job_name');
-            $table->string('job_role');
-            $table->string('job_qualification');
-            $table->string('job_activities');
-            $table->date('valid_start')->default(DB::raw('current_date'));
-            $table->date('valid_end');
-            $table->string('location');
-            $table->string('working_type');
+            $table->string('position_name');
+            $table->string('position_status')->default('Available');
+            $table->string('employment_type');
+            $table->longText('qualifications');
+            $table->date('post_date')->default(DB::raw('current_date'));
+            $table->date('end_date');
+            $table->foreignId('branch_id');
             $table->foreignId('department_id');
             $table->timestamps();
         });

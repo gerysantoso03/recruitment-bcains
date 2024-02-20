@@ -7,39 +7,41 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class DepartmentSeeder extends Seeder
+class DivisionSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        DB::table('departments')->insert([
+        DB::table('divisions')->insert([
             [
-                'department_name' => 'Human Capital',
-                'department_head' => 'Christine',
-                "division_id" => 3,
+                "division_name" => "Underwriting & Treaty",
+                "division_head" => 'Eric Sudarji',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ],
             [
-                'department_name' => 'Akseptasi',
-                'department_head' => 'Suci',
-                "division_id" => 1,
+                "division_name" => "Marketing",
+                "division_head" => 'Willy',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ],
             [
-                'department_name' => 'IT Software',
-                'department_head' => 'Alwin',
-                "division_id" => 5,
+                "division_name" => "Klaim",
+                "division_head" => 'Kyun',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ],
             [
-                'department_name' => 'Marketing Digital',
-                'department_head' => 'Riyoko',
-                "division_id" => 2,
+                "division_name" => "HCGA",
+                "division_head" => 'Iing',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                "division_name" => "Informatika",
+                "division_head" => 'Benny',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ],

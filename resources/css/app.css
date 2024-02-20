@@ -1,7 +1,53 @@
+/* Tailwind CSS */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-.hello {
-    color: blue;
+html {
+    font-size: 10px;
+    font-family: "Montserrat", sans-serif;
+}
+
+body {
+    color: #000;
+    font-size: 1.6rem;
+}
+
+a {
+    text-decoration: none;
+}
+
+img {
+    width: 100%;
+}
+
+@layer utilities {
+    .btn-logout {
+        display: none;
+        position: absolute;
+        padding: 5px;
+        cursor: pointer;
+        bottom: -4rem;
+        border-radius: 1rem;
+        font-size: 1.4rem;
+        font-weight: 600;
+        color: rgb(12 74 110);
+        right: 0;
+        gap: 5px;
+        border: 1px solid rgb(12 74 110);
+        align-items: center;
+    }
+
+    .show-btn-logout {
+        display: flex;
+    }
+
+    .btn-logout:hover {
+        color: #fff;
+        background-color: rgb(12 74 110);
+    }
+
+    .chevron-up {
+        transform: rotate(180deg);
+    }
 }
