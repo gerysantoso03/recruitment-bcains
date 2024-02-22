@@ -23,8 +23,8 @@
             <i class="fa-solid fa-user-tie text-white text-[1.7rem]"></i>
         </div>
         <div class="flex justify-center items-center gap-1">
-            <p class="text-[1.5rem] text-sky-900 font-semibold">Admin</p>
-            <i class="fa-solid fa-chevron-down text-[1.4rem] text-sky-800 cursor-pointer" id="showBtnLogout"></i>
+            <p class="text-[1.5rem] text-sky-900 font-semibold">{{ Auth::user()->username }}</p>
+            <i class="fa-solid fa-chevron-down duration-500 text-[1.4rem] text-sky-800 cursor-pointer" id="showBtnLogout"></i>
         </div>
         <a href="{{ route('logout') }}" class="btn-logout" id="btnLogout">
             <i class="fa-solid fa-arrow-right-from-bracket text-[1.7rem]"></i>

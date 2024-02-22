@@ -3,6 +3,9 @@
 @tailwind components;
 @tailwind utilities;
 
+/* flatpickr */
+@import "flatpickr/dist/flatpickr.min.css";
+
 html {
     font-size: 10px;
     font-family: "Montserrat", sans-serif;
@@ -23,11 +26,12 @@ img {
 
 @layer utilities {
     .btn-logout {
-        display: none;
+        display: flex;
         position: absolute;
         padding: 5px;
+        width: 10rem;
         cursor: pointer;
-        bottom: -4rem;
+        bottom: 5rem;
         border-radius: 1rem;
         font-size: 1.4rem;
         font-weight: 600;
@@ -36,10 +40,12 @@ img {
         gap: 5px;
         border: 1px solid rgb(12 74 110);
         align-items: center;
+        justify-content: center;
+        transition: bottom 0.5s ease;
     }
 
     .show-btn-logout {
-        display: flex;
+        bottom: -4rem;
     }
 
     .btn-logout:hover {

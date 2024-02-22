@@ -19,14 +19,14 @@
                     {{-- Card left section --}}
                     <div class="flex flex-col gap-1 justify-start min-w-[60rem] max-w-[60rem]">
                         <h3 class="text-[1.8rem] font-bold text-sky-900">{{ $job['position_name'] }}</h3>
-                        <p class="text-2xl text-sky-800 font-semibold">{{ $job['employment_type'] }}</p>
+                        <p class="text-base text-sky-800 font-semibold">{{ $job['employment_type'] }}</p>
                         <p class="text-[1.2rem] text-sky-800">{{ $job->branch['branch_location'] }}</p>
                         <p class="text-[1.2rem]">{{ Str::words($job['qualifications'], '20', '...') }}</p>
                     </div>
                     {{-- Card right section --}}
                     <div class="flex flex-col justify-center items-start">
-                        <p class="font-semibold text-[1.6rem] text-sky-900">{{ $job->department->division['division_name'] }}</p>
-                        <p class="font-semibold text-[1.6rem] text-sky-900">{{ $job->department['department_name'] }}</p>
+                        <p class="font-semibold text-[1.6rem] text-sky-900">{{ !empty($job->department->division) ? $job->department-division['division_name'] : '' }}</p>
+                        <p class="font-semibold text-[1.6rem] text-sky-900">{{ !empty($job->department) ? $job->department['department_name'] : '' }}</p>
                         <p class="text-sky-800 text-[1.4rem]">{{ Carbon\Carbon::parse($job['post_date'])->toFormattedDateString() }} - {{ Carbon\Carbon::parse($job['end_date'])->toFormattedDateString() }}</p>
                     </div>
                     {{-- Action Buttons --}}

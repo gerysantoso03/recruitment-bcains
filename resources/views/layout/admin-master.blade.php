@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="csrf-token" content="{{ csrf_token() }}" />
   {{-- Calling Tailwindcss with Vite --}}
   @vite(['resources/css/app.css', 'resources/js/app.js'])
 
@@ -16,6 +17,9 @@
 
   {{-- CKEditor CDN --}}
   <script src="https://cdn.ckeditor.com/ckeditor5/41.1.0/classic/ckeditor.js"></script>
+
+  {{-- Alpine JS CDN --}}
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.5/dist/cdn.min.js"></script>
 
   {{-- <link rel="shortcut icon" href="{{ asset('images/logo/nisuma-icon.png') }}" type="image/x-icon"> --}}
   <title>Recruitment BCAinsurance</title>

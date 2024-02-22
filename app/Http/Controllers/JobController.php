@@ -10,13 +10,23 @@ use Illuminate\Http\Request;
 
 class JobController extends Controller
 {
+    // Get all jobs data
+    public function renderAllJobs()
+    {
+        // Get all jobs belongs to each department obtained
+        $jobs = Job::with(['department', 'branch', 'department.division'])->get();
+
+        // Return view with all jobs available
+        return view('admin.jobs.job', compact('jobs'));
+    }
+
     public function renderJobDetailAdmin($id)
     {
         // Retrieve job detail with given id
         $job = Job::findOrFail($id);
 
         if ($job) {
-            return view('admin.job-detail', compact('job'));
+            return view('admin.jobs.job-detail', compact('job'));
         }
 
         return redirect()->back()->with('Failed', "Job is not exists!!");
@@ -30,7 +40,7 @@ class JobController extends Controller
         // Retrieve all branchs
         $branchs = Branch::all();
 
-        return view('admin.add-new-job', compact('departments', 'branchs'));
+        return view('admin.jobs.add-new-job', compact('departments', 'branchs'));
     }
 
     public function renderUpdateJobForm($id)
@@ -43,7 +53,7 @@ class JobController extends Controller
 
         $job = Job::findOrFail($id);
 
-        return view('admin.update-job', compact('departments', 'branchs', 'job'));
+        return view('admin.jobs.update-job', compact('departments', 'branchs', 'job'));
     }
 
     // Create new job 
