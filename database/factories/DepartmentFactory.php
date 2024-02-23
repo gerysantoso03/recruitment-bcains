@@ -25,12 +25,12 @@ class DepartmentFactory extends Factory
      */
     public function definition(): array
     {
+        // Get random division id
+        $division = Division::inRandomOrder()->first();
         return [
             'department_name' => fake()->company(),
             'department_head' => fake()->name(),
-            "division_id" => function () {
-                return Division::factory()->create()->id;
-            }
+            'division_id' => $division->id,
         ];
     }
 }

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\DivisionController;
 use App\Http\Controllers\JobController;
 
 /*
@@ -27,7 +28,7 @@ Route::get('/logout', [AuthController::class, 'signOut'])->name('logout');
 Route::get('/', function () {
     return view('home');
 });
-// Routes Post
+// Routes Authentication
 Route::post('/register-user', [AuthController::class, 'registerNewUser'])->name('register.user');
 Route::post('/login-user', [AuthController::class, 'signInVerification'])->name('login.user');
 
@@ -48,6 +49,15 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/admin-department', [DepartmentController::class, 'renderAllDepartment'])->name('department');
         Route::get('/admin-department/add-department-form', [DepartmentController::class, 'renderDepartmentAddForm'])->name('add.department.form');
         Route::post('/admin-department/add-department', [DepartmentController::class, 'createDepartment'])->name('add.department');
+        Route::get('/admin-department/update-department-form/{id}', [DepartmentController::class, 'renderDepartmentUpdateForm'])->name('update.department.form');
+        Route::post('/admin-department/update-department/{id}', [DepartmentController::class, 'updateDepartment'])->name('update.department');
         Route::get('/admin-department/delete-department/{id}', [DepartmentController::class, 'deleteDepartment'])->name('delete.department');
+        // Route Divisions
+        Route::get('/admin-division', [DivisionController::class, 'renderAllDivisions'])->name('division');
+        Route::get('/admin-division/add-division-form', [DivisionController::class, 'renderDivisionAddForm'])->name('add.division.form');
+        Route::post('/admin-division/add-division', [DivisionController::class, 'createDivision'])->name('add.division');
+        Route::get('/admin-division/delete-division/{id}', [DivisionController::class, 'deleteDivision'])->name('delete.division');
+        Route::get('/admin-division/update-division-form/{id}', [DivisionController::class, 'renderDivisionUpdateForm'])->name('update.division.form');
+        Route::post('/admin-division/update-division/{id}', [DivisionController::class, 'updateDivision'])->name('update.division');
     });
 });

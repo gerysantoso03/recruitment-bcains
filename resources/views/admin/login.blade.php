@@ -25,14 +25,14 @@
                 <form action="{{ route('login.user') }}" method="post" class="p-4 flex flex-col gap-4">
                     @csrf
                     <div class="flex flex-col gap-4 w-full">
-                        <label class="text-sky-800 font-semibold text-2xl" for="username">Username</label>
+                        <label class="text-sky-800 font-semibold text-xl" for="username">Username</label>
                         <input type="text" name="username" placeholder="Exp: bobbydut, adminbcai, hcbcains" class="text-[1.4rem] p-4 border border-sky-900 rounded-xl border-black">
                         @if ($errors->has('username'))
                             <span class="text-red-500 text-sm">{{ $errors->first('username') }}</span>
                         @endif
                     </div>
                     <div class="flex flex-col gap-4 w-full mb-8">
-                        <label class="text-sky-800 font-semibold text-2xl" for="password">Password</label>
+                        <label class="text-sky-800 font-semibold text-xl" for="password">Password</label>
                         <input placeholder="Password" name="password" class="text-[1.4rem] p-4 border border-sky-900 rounded-xl border-black" type="password">
                         @if ($errors->has('password'))
                             <span class="text-red-500 text-sm">{{ $errors->first('password') }}</span>

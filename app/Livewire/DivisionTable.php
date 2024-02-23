@@ -2,7 +2,6 @@
 
 namespace App\Livewire;
 
-use App\Models\Department;
 use App\Models\Division;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Builder;
@@ -13,15 +12,13 @@ use PowerComponents\LivewirePowerGrid\Facades\Filter;
 use PowerComponents\LivewirePowerGrid\Footer;
 use PowerComponents\LivewirePowerGrid\Header;
 use PowerComponents\LivewirePowerGrid\PowerGrid;
-use PowerComponents\LivewirePowerGrid\PowerGridColumns;
 use PowerComponents\LivewirePowerGrid\PowerGridFields;
 use PowerComponents\LivewirePowerGrid\PowerGridComponent;
 use PowerComponents\LivewirePowerGrid\Traits\WithExport;
 
-final class DepartmentTable extends PowerGridComponent
+final class DivisionTable extends PowerGridComponent
 {
     use WithExport;
-    public bool $showFilters = true;
 
     public function setUp(): array
     {
@@ -41,49 +38,41 @@ final class DepartmentTable extends PowerGridComponent
     public function header(): array
     {
         return [
-            Button::add('add-department-form')
+            Button::add('add-division-form')
                 ->slot('<i class="fa-solid fa-plus text-sky-800"></i>')
                 ->class('border py-2 px-3 rounded-lg flex items-center justify-center')
-                ->route('add.department.form', []),
+                ->route('add.division.form', []),
         ];
     }
 
     public function datasource(): Builder
     {
-        return Department::query()->with('division');
+        return Division::query();
     }
 
     public function relationSearch(): array
     {
-        return [
-            'division' => ['division_name']
-        ];
+        return [];
     }
 
     public function fields(): PowerGridFields
     {
         return PowerGrid::fields()
             ->add('id')
-            ->add('department_name')
-            ->add('department_head')
-            ->add('division_name', function (Department $model) {
-                return $model->division->division_name;
-            });
+            ->add('division_name')
+            ->add('division_head');
     }
 
     public function columns(): array
     {
         return [
-            Column::make('Id', 'id')->sortable(),
-            Column::make('Departemen', 'department_name')
+            Column::make('Id', 'id'),
+            Column::make('Division name', 'division_name')
                 ->sortable()
                 ->searchable(),
-
-            Column::make('Kepala Departemen', 'department_head')
+            Column::make('Division head', 'division_head')
                 ->sortable()
                 ->searchable(),
-
-            Column::make('Divisi', 'division_name'),
 
             Column::action('Action')
         ];
@@ -100,20 +89,17 @@ final class DepartmentTable extends PowerGridComponent
         $this->js('alert(' . $rowId . ')');
     }
 
-    public function actions(Department $row): array
+    public function actions(Division $row): array
     {
         return [
-            Button::add('show')
-                ->slot('<i class="fa-solid fa-eye text-sky-800"></i>')
-                ->class('pg-btn-white'),
             Button::add('delete')
                 ->slot('<i class="fa-solid fa-trash-can text-red-600"></i>')
                 ->class('pg-btn-white')
-                ->route('delete.department', ['id' => $row->id]),
+                ->route('delete.division', ['id' => $row->id]),
             Button::add('update')
                 ->slot('<i class="fa-solid fa-pen-to-square text-amber-600"></i>')
                 ->class('pg-btn-white')
-                ->route('update.department.form', ['id' => $row->id]),
+                ->route('update.division.form', ['id' => $row->id]),
         ];
     }
 

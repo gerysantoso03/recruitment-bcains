@@ -30,7 +30,7 @@
             </div> Departments
         </a>
         {{-- Navigation Item --}}
-        <a href="" class="{{ Route::is('division') ? 'text-white bg-sky-800' : 'text-sky-950' }} px-4 py-6 flex gap-2 items-center font-semibold text-[1.5rem] shadow-gray-500 shadow-[0_1px_0_0]">
+        <a href="{{ route('division') }}" class="{{ Route::is('division') ? 'text-white bg-sky-800' : 'text-sky-950' }} px-4 py-6 flex gap-2 items-center font-semibold text-[1.5rem] shadow-gray-500 shadow-[0_1px_0_0]">
             <div class="w-[3rem] h-[3rem] flex items-center justify-center">
                 <i class="fa-solid fa-building-user text-[1.8rem]"></i> 
             </div> Divisions

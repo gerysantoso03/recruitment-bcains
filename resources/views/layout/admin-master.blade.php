@@ -18,9 +18,6 @@
   {{-- CKEditor CDN --}}
   <script src="https://cdn.ckeditor.com/ckeditor5/41.1.0/classic/ckeditor.js"></script>
 
-  {{-- Alpine JS CDN --}}
-  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.5/dist/cdn.min.js"></script>
-
   {{-- <link rel="shortcut icon" href="{{ asset('images/logo/nisuma-icon.png') }}" type="image/x-icon"> --}}
   <title>Recruitment BCAinsurance</title>
 </head>
@@ -41,5 +38,6 @@
 
     {{-- Jquery CDN --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    @vite('resources/js/navbar.js')
 </body>
 </html>

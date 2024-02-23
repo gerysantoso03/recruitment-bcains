@@ -9,17 +9,17 @@
                     <i class="fa-solid fa-chevron-left text-[2.5rem]"></i> Back
                 </a>
                 {{-- Form Title --}}
-                <h1 class="font-bold text-sky-900 text-[2.5rem]">Add New Department</h1>
+                <h1 class="font-bold text-sky-900 text-[2.5rem]">Update Department</h1>
             </div>
             {{-- Job Form --}}
-            <form action="{{ route('add.department') }}" method="post" class="border-2 border-sky-900 rounded-lg flex flex-col gap-4 p-4">
+            <form action="{{ route('update.department', $department['id']) }}" method="post" class="border-2 border-sky-900 rounded-lg flex flex-col gap-4 p-4">
                 @csrf
                 {{-- First Section --}}
                 <div class="flex justify-start items-center gap-8">
                     {{-- Input Wrapper --}}
                     <div class="flex flex-col gap-1 flex-1">
                         <label for="department_name" class="font-semibold text-[1.7rem] text-sky-900">Department Name</label>
-                        <input type="text" class="border border-sky-900 rounded-lg p-3" name="department_name">
+                        <input type="text" class="border border-sky-900 rounded-lg p-3" value="{{ $department['department_name'] }}" name="department_name">
                         @if ($errors->has('department_name'))
                             <span class="text-red-500 text-sm">{{ $errors->first('department_name') }}</span>
                         @endif
@@ -27,7 +27,7 @@
                     {{-- Input Wrapper --}}
                     <div class="flex flex-col gap-1 flex-1">
                         <label for="department_head" class="font-semibold text-[1.7rem] text-sky-900">Department Head</label>
-                        <input type="text" class="border border-sky-900 rounded-lg p-3" name="department_head">
+                        <input type="text" class="border border-sky-900 rounded-lg p-3" value="{{ $department['department_head'] }}" name="department_head">
                         @if ($errors->has('department_head'))
                             <span class="text-red-500 text-sm">{{ $errors->first('department_head') }}</span>
                         @endif
@@ -40,7 +40,7 @@
                         <label for="division_id" class="font-semibold text-[1.7rem] text-sky-900">Division</label>
                         <select class="border border-sky-900 rounded-lg p-3" name="division_id">
                             @foreach ($divisions as $division)
-                                <option value="{{ $division['id'] }}">{{ $division['division_name'] }}</option>
+                                <option {{ $department['division_id'] == $division['id'] ? 'selected' : '' }} value="{{ $division['id'] }}">{{ $division['division_name'] }}</option>
                             @endforeach
                         </select>
                         @if ($errors->has('division_id'))

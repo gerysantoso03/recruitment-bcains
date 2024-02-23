@@ -25,6 +25,16 @@ class DepartmentController extends Controller
         return view('admin.departments.add-new-department', compact('divisions'));
     }
 
+    public function renderDepartmentUpdateForm($id)
+    {
+        // Get all divisions
+        $divisions = Division::all();
+
+        $department = Department::findOrFail($id);
+
+        return view('admin.departments.update-department', compact('divisions', 'department'));
+    }
+
     public function createDepartment(Request $request)
     {
         // Validate request input
@@ -37,7 +47,7 @@ class DepartmentController extends Controller
         // Get request input
         $data = $request->all();
 
-        // Create new job
+        // Create new department
         Department::create([
             "department_name" => $data['department_name'],
             "department_head" => $data['department_head'],
@@ -47,13 +57,36 @@ class DepartmentController extends Controller
         return redirect('/admin-department')->with('success', 'Successfully created new department!!');
     }
 
+    public function updateDepartment(Request $request, $id)
+    {
+        $department = Department::findOrFail($id);
+
+        // Validate request input
+        $request->validate([
+            'department_name' => 'required',
+            'department_head' => 'required',
+            'division_id' => 'required',
+        ]);
+
+        // Get request input
+        $data = $request->all();
+
+        $department->update([
+            "department_name" => $data['department_name'],
+            "department_head" => $data['department_head'],
+            "division_id" => $data['division_id'],
+        ]);
+
+        return redirect('/admin-department')->with('success', 'Successfully update department!!');
+    }
+
     public function deleteDepartment($id)
     {
-        // Obtained job with selected id 
+        // Obtained department with selected id 
         $department = Department::findOrFail($id);
 
         if ($department) {
-            // Delete selected job from database
+            // Delete selected department from database
             $department->delete();
             return redirect('/admin-department')->with('success', 'Successfully delete department!!');
         }

@@ -27,17 +27,16 @@ class JobFactory extends Factory
      */
     public function definition(): array
     {
+        // Get random department and branch id that've been made
+        $department = Department::inRandomOrder()->first();
+        $branch = Branch::inRandomOrder()->first();
         return [
             "position_name" => fake()->jobTitle(),
             "employment_type" => "Contract",
-            "qualifications" => fake()->text(30),
-            "end_date" => fake()->date(),
-            "branch_id" => function () {
-                return Branch::factory()->create()->id;
-            },
-            "department_id" => function () {
-                return Department::factory()->create()->id;
-            }
+            "qualifications" => fake()->paragraphs(3, true),
+            "end_date" => fake()->dateTimeBetween('now +1 days', '+10 months'),
+            "branch_id" => $branch->id,
+            "department_id" => $department->id,
         ];
     }
 }

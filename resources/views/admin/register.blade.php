@@ -20,7 +20,7 @@
                     @csrf
                     {{-- Input Wrapper --}}
                     <div class="flex flex-col gap-4 w-full">
-                        <label class="text-sky-800 font-semibold text-2xl" for="username">Username</label>
+                        <label class="text-sky-800 font-semibold text-base" for="username">Username</label>
                         <input type="text" placeholder="Exp: bobbydut, adminbcai, hcbcains" class="text-[1.4rem] p-4 border border-sky-900 rounded-xl border-black" name="username">
                         @if ($errors->has('username'))
                             <span class="text-red-500 text-sm">{{ $errors->first('username') }}</span>
@@ -28,7 +28,7 @@
                     </div>
                     {{-- Input Wrapper --}}
                     <div class="flex flex-col gap-4 w-full">
-                        <label class="text-sky-800 font-semibold text-2xl" for="email">Email</label>
+                        <label class="text-sky-800 font-semibold text-base" for="email">Email</label>
                         <input placeholder="bobbydut@gmail.com" class="text-[1.4rem] p-4 border border-sky-900 rounded-xl border-black" type="email" name="email">
                         @if ($errors->has('email'))
                             <span class="text-red-500 text-sm">{{ $errors->first('email') }}</span>
@@ -36,7 +36,7 @@
                     </div>
                     {{-- Input Wrapper --}}
                     <div class="flex flex-col gap-4 w-full">
-                        <label class="text-sky-800 font-semibold text-2xl" for="phone_number">Phone Number</label>
+                        <label class="text-sky-800 font-semibold text-base" for="phone_number">Phone Number</label>
                         <input placeholder="0849394039302" class="text-[1.4rem] p-4 border border-sky-900 rounded-xl border-black" type="text" name="phone_number">
                         @if ($errors->has('phone_number'))
                             <span class="text-red-500 text-sm">{{ $errors->first('phone_number') }}</span>
@@ -44,7 +44,7 @@
                     </div>
                     {{-- Input Wrapper --}}
                     <div class="flex flex-col gap-4 w-full mb-8">
-                        <label class="text-sky-800 font-semibold text-2xl" for="password">Password</label>
+                        <label class="text-sky-800 font-semibold text-base" for="password">Password</label>
                         <input placeholder="Password" class="text-[1.4rem] p-4 border border-sky-900 rounded-xl border-black" type="password" name="password">
                         @if ($errors->has('password'))
                             <span class="text-red-500 text-sm">{{ $errors->first('password') }}</span>

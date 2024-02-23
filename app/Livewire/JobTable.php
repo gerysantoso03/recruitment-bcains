@@ -2,8 +2,7 @@
 
 namespace App\Livewire;
 
-use App\Models\Department;
-use App\Models\Division;
+use App\Models\Job;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use PowerComponents\LivewirePowerGrid\Button;
@@ -13,15 +12,14 @@ use PowerComponents\LivewirePowerGrid\Facades\Filter;
 use PowerComponents\LivewirePowerGrid\Footer;
 use PowerComponents\LivewirePowerGrid\Header;
 use PowerComponents\LivewirePowerGrid\PowerGrid;
-use PowerComponents\LivewirePowerGrid\PowerGridColumns;
 use PowerComponents\LivewirePowerGrid\PowerGridFields;
 use PowerComponents\LivewirePowerGrid\PowerGridComponent;
 use PowerComponents\LivewirePowerGrid\Traits\WithExport;
+use Illuminate\support\Str;
 
-final class DepartmentTable extends PowerGridComponent
+final class JobTable extends PowerGridComponent
 {
     use WithExport;
-    public bool $showFilters = true;
 
     public function setUp(): array
     {
@@ -31,7 +29,7 @@ final class DepartmentTable extends PowerGridComponent
             Exportable::make('export')
                 ->striped()
                 ->type(Exportable::TYPE_XLS, Exportable::TYPE_CSV),
-            Header::make()->showToggleColumns()->showSearchInput(),
+            Header::make()->showSearchInput(),
             Footer::make()
                 ->showPerPage()
                 ->showRecordCount(),
@@ -41,22 +39,24 @@ final class DepartmentTable extends PowerGridComponent
     public function header(): array
     {
         return [
-            Button::add('add-department-form')
+            Button::add('add-job-form')
                 ->slot('<i class="fa-solid fa-plus text-sky-800"></i>')
                 ->class('border py-2 px-3 rounded-lg flex items-center justify-center')
-                ->route('add.department.form', []),
+                ->route('add.job.form', []),
         ];
     }
 
+
     public function datasource(): Builder
     {
-        return Department::query()->with('division');
+        return Job::query()->with('branch', 'department');
     }
 
     public function relationSearch(): array
     {
         return [
-            'division' => ['division_name']
+            "branch" => ['branch_name'],
+            "department" => ['department_name']
         ];
     }
 
@@ -64,26 +64,39 @@ final class DepartmentTable extends PowerGridComponent
     {
         return PowerGrid::fields()
             ->add('id')
-            ->add('department_name')
-            ->add('department_head')
-            ->add('division_name', function (Department $model) {
-                return $model->division->division_name;
-            });
+            ->add('position_name')
+            ->add('position_status')
+            ->add('employment_type')
+            // ->add('post_date_formatted', fn (Job $model) => Carbon::parse($model->post_date)->format('d/m/Y'))
+            ->add('end_date_formatted', fn (Job $model) => Carbon::parse($model->end_date)->format('d/m/Y'))
+            ->add('branch_name', fn (Job $model) => $model->branch->branch_name)
+            ->add('department_name', fn (Job $model) => $model->department->department_name);
     }
 
     public function columns(): array
     {
         return [
-            Column::make('Id', 'id')->sortable(),
-            Column::make('Departemen', 'department_name')
+            Column::make('Id', 'id'),
+            Column::make('Position name', 'position_name')
                 ->sortable()
                 ->searchable(),
 
-            Column::make('Kepala Departemen', 'department_head')
+            Column::make('Position status', 'position_status')
                 ->sortable()
                 ->searchable(),
 
-            Column::make('Divisi', 'division_name'),
+            Column::make('Employment type', 'employment_type')
+                ->sortable()
+                ->searchable(),
+
+            // Column::make('Post date', 'post_date_formatted', 'post_date')
+            //     ->sortable(),
+
+            Column::make('End date', 'end_date_formatted', 'end_date')
+                ->sortable(),
+
+            Column::make('Branch', 'branch_name'),
+            Column::make('Department', 'department_name'),
 
             Column::action('Action')
         ];
@@ -91,7 +104,10 @@ final class DepartmentTable extends PowerGridComponent
 
     public function filters(): array
     {
-        return [];
+        return [
+            Filter::datepicker('post_date'),
+            Filter::datepicker('end_date'),
+        ];
     }
 
     #[\Livewire\Attributes\On('edit')]
@@ -100,20 +116,21 @@ final class DepartmentTable extends PowerGridComponent
         $this->js('alert(' . $rowId . ')');
     }
 
-    public function actions(Department $row): array
+    public function actions(Job $row): array
     {
         return [
             Button::add('show')
                 ->slot('<i class="fa-solid fa-eye text-sky-800"></i>')
-                ->class('pg-btn-white'),
+                ->class('pg-btn-white')
+                ->route('job.detail.admin', ['id' => $row->id]),
             Button::add('delete')
                 ->slot('<i class="fa-solid fa-trash-can text-red-600"></i>')
                 ->class('pg-btn-white')
-                ->route('delete.department', ['id' => $row->id]),
+                ->route('delete.job', ['id' => $row->id]),
             Button::add('update')
                 ->slot('<i class="fa-solid fa-pen-to-square text-amber-600"></i>')
                 ->class('pg-btn-white')
-                ->route('update.department.form', ['id' => $row->id]),
+                ->route('update.job.form', ['id' => $row->id]),
         ];
     }
 
