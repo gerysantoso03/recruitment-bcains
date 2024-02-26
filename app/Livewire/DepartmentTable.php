@@ -45,8 +45,36 @@ final class DepartmentTable extends PowerGridComponent
                 ->slot('<i class="fa-solid fa-plus text-sky-800"></i>')
                 ->class('border py-2 px-3 rounded-lg flex items-center justify-center')
                 ->route('add.department.form', []),
+            Button::add('delete-all-department')
+                ->slot('<i class="fa-solid fa-trash-can text-red-600"></i>')
+                ->class('border py-2 px-3 rounded-lg flex items-center justify-center')
+                ->dispatch('deleteAllDepartments', []),
         ];
     }
+
+    protected function getListeners()
+    {
+        return array_merge(
+            parent::getListeners(),
+            [
+                'eventX',
+                'eventY',
+                'deleteAllDepartments',
+            ]
+        );
+    }
+
+    public function deleteAllDepartments()
+    {
+        if (count($this->checkboxValues) == 0) {
+            return redirect('/admin-department')->with('failed', 'You must select at least one item!!');
+        }
+
+        Department::whereIn('id', $this->checkboxValues)->delete();
+
+        return redirect('/admin-department')->with('success', 'Successfully delete all selected departments!!');
+    }
+
 
     public function datasource(): Builder
     {
@@ -103,9 +131,6 @@ final class DepartmentTable extends PowerGridComponent
     public function actions(Department $row): array
     {
         return [
-            Button::add('show')
-                ->slot('<i class="fa-solid fa-eye text-sky-800"></i>')
-                ->class('pg-btn-white'),
             Button::add('delete')
                 ->slot('<i class="fa-solid fa-trash-can text-red-600"></i>')
                 ->class('pg-btn-white')

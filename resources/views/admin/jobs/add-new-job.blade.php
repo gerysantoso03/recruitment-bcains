@@ -94,19 +94,7 @@
     </main>
     <script>
         ClassicEditor
-            .create(document.querySelector('#jobRole'))
-            .catch(error => {
-                console.error(error);
-        });
-
-        ClassicEditor
             .create( document.querySelector( '#jobQualification' ) )
-            .catch( error => {
-                console.error( error );
-        });
-
-        ClassicEditor
-            .create( document.querySelector( '#jobActivities' ) )
             .catch( error => {
                 console.error( error );
         });

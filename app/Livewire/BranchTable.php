@@ -2,7 +2,7 @@
 
 namespace App\Livewire;
 
-use App\Models\Job;
+use App\Models\Branch;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use PowerComponents\LivewirePowerGrid\Button;
@@ -15,9 +15,8 @@ use PowerComponents\LivewirePowerGrid\PowerGrid;
 use PowerComponents\LivewirePowerGrid\PowerGridFields;
 use PowerComponents\LivewirePowerGrid\PowerGridComponent;
 use PowerComponents\LivewirePowerGrid\Traits\WithExport;
-use Illuminate\support\Str;
 
-final class JobTable extends PowerGridComponent
+final class BranchTable extends PowerGridComponent
 {
     use WithExport;
 
@@ -39,16 +38,17 @@ final class JobTable extends PowerGridComponent
     public function header(): array
     {
         return [
-            Button::add('add-job-form')
+            Button::add('add-branch-form')
                 ->slot('<i class="fa-solid fa-plus text-sky-800"></i>')
                 ->class('border py-2 px-3 rounded-lg flex items-center justify-center')
-                ->route('add.job.form', []),
-            Button::add('delete-all-job')
+                ->route('add.branch.form', []),
+            Button::add('delete-all-branch')
                 ->slot('<i class="fa-solid fa-trash-can text-red-600"></i>')
                 ->class('border py-2 px-3 rounded-lg flex items-center justify-center')
-                ->dispatch('deleteAllJobs', []),
+                ->dispatch('deleteAllBranches', []),
         ];
     }
+
 
     protected function getListeners()
     {
@@ -57,93 +57,64 @@ final class JobTable extends PowerGridComponent
             [
                 'eventX',
                 'eventY',
-                'deleteAllJobs',
+                'deleteAllBranches',
             ]
         );
     }
 
-    public function deleteAllJobs()
+    public function deleteAllBranches()
     {
         if (count($this->checkboxValues) == 0) {
-            return redirect('/admin-job')->with('failed', 'You must select at least one item!!');
+            return redirect('/admin-branch')->with('failed', 'You must select at least one item!!');
         }
 
-        Job::whereIn('id', $this->checkboxValues)->delete();
+        Branch::whereIn('id', $this->checkboxValues)->delete();
 
-        return redirect('/admin-job')->with('success', 'Successfully delete selected job!!');
+        return redirect('/admin-branch')->with('success', 'Successfully delete all selected branches!!');
     }
-
 
     public function datasource(): Builder
     {
-        return Job::query()->with('branch', 'department');
+        return Branch::query();
     }
 
     public function relationSearch(): array
     {
-        return [
-            "branch" => ['branch_name'],
-            "department" => ['department_name']
-        ];
+        return [];
     }
 
     public function fields(): PowerGridFields
     {
         return PowerGrid::fields()
-            // ->add('id')
-            ->add('is_available')
-            ->add('position_name')
-            ->add('employment_type')
-            // ->add('post_date_formatted', fn (Job $model) => Carbon::parse($model->post_date)->format('d/m/Y'))
-            ->add('end_date_formatted', fn (Job $model) => Carbon::parse($model->end_date)->format('d/m/Y'))
-            ->add('branch_name', fn (Job $model) => $model->branch->branch_name)
-            ->add('department_name', fn (Job $model) => $model->department->department_name);
+            ->add('id')
+            ->add('branch_name')
+            ->add('branch_location')
+            ->add('branch_head');
     }
 
     public function columns(): array
     {
         return [
-            // Column::make('Id', 'id'),    
-            Column::make('is_available', 'is_available')
-                ->title('Available')
-                ->field('is_available')
-                ->toggleable(true, 'yes', 'no'),
-            Column::make('Position name', 'position_name')
+            Column::make('Id', 'id')->sortable(),
+            Column::make('Branch name', 'branch_name')
                 ->sortable()
                 ->searchable(),
 
-            Column::make('Employment type', 'employment_type')
+            Column::make('Branch location', 'branch_location')
                 ->sortable()
                 ->searchable(),
 
-            // Column::make('Post date', 'post_date_formatted', 'post_date')
-            //     ->sortable(),
-
-            Column::make('End date', 'end_date_formatted', 'end_date')
-                ->sortable(),
-
-            Column::make('Branch', 'branch_name'),
-            Column::make('Department', 'department_name'),
+            Column::make('Branch head', 'branch_head')
+                ->sortable()
+                ->searchable(),
 
             Column::action('Action')
         ];
     }
 
-    public function onUpdatedToggleable($id, $field, $value): void
-    {
-        Job::query()->find($id)->update([
-            $field => $value,
-        ]);
-    }
-
     public function filters(): array
     {
-        return [
-            // Filter::datepicker('post_date_formatted', 'post_date'),
-            // Filter::datepicker('end_date_formatted', 'end_date'),
-            Filter::boolean('is_available')
-                ->label('Available', 'Closed')
-        ];
+        return [];
     }
 
     #[\Livewire\Attributes\On('edit')]
@@ -152,21 +123,17 @@ final class JobTable extends PowerGridComponent
         $this->js('alert(' . $rowId . ')');
     }
 
-    public function actions(Job $row): array
+    public function actions(Branch $row): array
     {
         return [
-            Button::add('show')
-                ->slot('<i class="fa-solid fa-eye text-sky-800"></i>')
-                ->class('pg-btn-white')
-                ->route('job.detail.admin', ['id' => $row->id]),
             Button::add('delete')
                 ->slot('<i class="fa-solid fa-trash-can text-red-600"></i>')
                 ->class('pg-btn-white')
-                ->route('delete.job', ['id' => $row->id]),
+                ->route('delete.branch', ['id' => $row->id]),
             Button::add('update')
                 ->slot('<i class="fa-solid fa-pen-to-square text-amber-600"></i>')
                 ->class('pg-btn-white')
-                ->route('update.job.form', ['id' => $row->id]),
+                ->route('update.branch.form', ['id' => $row->id]),
         ];
     }
 

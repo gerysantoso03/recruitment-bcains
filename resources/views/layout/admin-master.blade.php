@@ -6,6 +6,7 @@
   <meta name="csrf-token" content="{{ csrf_token() }}" />
   {{-- Calling Tailwindcss with Vite --}}
   @vite(['resources/css/app.css', 'resources/js/app.js'])
+  @vite('resources/css/flatpickr.css')
 
   {{-- Font Awesome CDN --}}
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -27,7 +28,7 @@
     @if(!(Route::currentRouteName() == 'login') && !(Route::currentRouteName() == 'register'))
       @include('layout.global.admin-sidebar')
     @endif
-    <main class="flex flex-col w-full">
+    <main class="flex flex-col w-full overflow-scroll">
       @if(!(Route::currentRouteName() == 'login') && !(Route::currentRouteName() == 'register'))
         @include('layout.global.admin-navbar')
       @endif

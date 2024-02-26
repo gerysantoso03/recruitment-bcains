@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BranchController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\DivisionController;
@@ -41,10 +42,18 @@ Route::group(['middleware' => ['auth']], function () {
         // Route Jobs
         Route::get('/admin-job', [JobController::class, 'renderAllJobs'])->name('job');
         Route::get('/admin-job/add-job-form', [JobController::class, 'renderAddJobForm'])->name('add.job.form');
-        Route::get('/admin-job/update-job-form/{id}', [JobController::class, 'renderUpdateJobForm'])->name('update.job.form');
         Route::get('/admin-job/{id}', [JobController::class, 'renderJobDetailAdmin'])->name('job.detail.admin');
         Route::get('/admin-job/delete-job/{id}', [JobController::class, 'deleteJob'])->name('delete.job');
         Route::post('/admin-job/add-job', [JobController::class, 'createJob'])->name('add.job');
+        Route::get('/admin-job/update-job-form/{id}', [JobController::class, 'renderUpdateJobForm'])->name('update.job.form');
+        Route::post('/admin-job/update-job/{id}', [JobController::class, 'updateJob'])->name('update.job');
+        //Route Branches
+        Route::get('/admin-branch', [BranchController::class, 'renderAllBranches'])->name('branch');
+        Route::get('/admin-branch/add-branch-form', [BranchController::class, 'renderBranchAddForm'])->name('add.branch.form');
+        Route::post('/admin-branch/add-branch', [BranchController::class, 'createBranch'])->name('add.branch');
+        Route::get('/admin-branch/update-branch-form/{id}', [BranchController::class, 'renderBranchUpdateForm'])->name('update.branch.form');
+        Route::post('/admin-branch/update-branch/{id}', [BranchController::class, 'updateBranch'])->name('update.branch');
+        Route::get('/admin-brach/delete-branch/{id}', [BranchController::class, 'deleteBranch'])->name('delete.branch');
         // Route Departments
         Route::get('/admin-department', [DepartmentController::class, 'renderAllDepartment'])->name('department');
         Route::get('/admin-department/add-department-form', [DepartmentController::class, 'renderDepartmentAddForm'])->name('add.department.form');

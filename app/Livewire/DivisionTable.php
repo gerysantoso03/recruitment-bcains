@@ -42,7 +42,34 @@ final class DivisionTable extends PowerGridComponent
                 ->slot('<i class="fa-solid fa-plus text-sky-800"></i>')
                 ->class('border py-2 px-3 rounded-lg flex items-center justify-center')
                 ->route('add.division.form', []),
+            Button::add('delete-all-divisions')
+                ->slot('<i class="fa-solid fa-trash-can text-red-600"></i>')
+                ->class('border py-2 px-3 rounded-lg flex items-center justify-center')
+                ->dispatch('deleteAllDivisions', []),
         ];
+    }
+
+    protected function getListeners()
+    {
+        return array_merge(
+            parent::getListeners(),
+            [
+                'eventX',
+                'eventY',
+                'deleteAllDivisions',
+            ]
+        );
+    }
+
+    public function deleteAllDivisions()
+    {
+        if (count($this->checkboxValues) == 0) {
+            return redirect('/admin-division')->with('failed', 'You must select at least one item!!');
+        }
+
+        Division::whereIn('id', $this->checkboxValues)->delete();
+
+        return redirect('/admin-division')->with('success', 'Successfully delete all selected divisions!!');
     }
 
     public function datasource(): Builder

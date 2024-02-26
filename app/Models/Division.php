@@ -28,4 +28,13 @@ class Division extends Model
     {
         return $this->hasMany(Department::class);
     }
+
+    // overwriting the model boot method to extend it with a addition to the deleting event
+    // public static function boot()
+    // {
+    //     parent::boot();
+    //     static::deleting(function ($division) {
+    //         $division->departments->delete();
+    //     });
+    // }
 }

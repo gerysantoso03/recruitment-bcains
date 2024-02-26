@@ -15,13 +15,15 @@ return new class extends Migration
         Schema::create('jobs', function (Blueprint $table) {
             $table->id();
             $table->string('position_name');
-            $table->string('position_status')->default('Available');
+            $table->boolean('is_available')->default(true);
             $table->string('employment_type');
             $table->longText('qualifications');
             $table->date('post_date')->default(DB::raw('current_date'));
             $table->date('end_date');
-            $table->foreignId('branch_id');
-            $table->foreignId('department_id');
+            $table->unsignedBigInteger('branch_id');
+            $table->unsignedBigInteger('department_id');
+            $table->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
+            $table->foreign('department_id')->references('id')->on('departments')->onDelete('cascade');
             $table->timestamps();
         });
     }

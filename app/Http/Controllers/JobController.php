@@ -85,6 +85,36 @@ class JobController extends Controller
         return redirect('/admin-job')->with('success', 'Successfully created new job!!');
     }
 
+    public function updateJob(Request $request, $id)
+    {
+        // Validate request input
+        $request->validate([
+            'position_name' => 'required',
+            'end_date' => 'required|date|after_or_equal:now',
+            'employment_type' => 'required',
+            'qualifications' => 'required',
+            'branch_id' => 'required',
+            'department_id' => 'required',
+        ]);
+
+        // Get request input
+        $data = $request->all();
+
+        // Get selected job 
+        $job = Job::findOrFail($id);
+
+        $job->update([
+            'position_name' => $data['position_name'],
+            'end_date' => $data['end_date'],
+            'employment_type' => $data['employment_type'],
+            'qualifications' => $data['qualifications'],
+            'branch_id' => $data['branch_id'],
+            'department_id' => $data['department_id']
+        ]);
+
+        return redirect('/admin-job')->with('success', 'Successfully update job!!');
+    }
+
     public function deleteJob($id)
     {
         // Obtained job with selected id 

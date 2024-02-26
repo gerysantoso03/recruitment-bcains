@@ -24,15 +24,21 @@
             </div> Jobs
         </a>
         {{-- Navigation Item --}}
+        <a href="{{ route('branch') }}" class="{{ Route::is('branch') ? 'text-white bg-sky-800' : 'text-sky-950' }} px-4 py-6 flex gap-2 items-center font-semibold text-[1.5rem] shadow-gray-500 shadow-[0_1px_0_0]">
+            <div class="w-[3rem] h-[3rem] flex items-center justify-center">
+                <i class="fa-solid fa-map-location-dot text-[1.8rem]"></i> 
+            </div> Branches
+        </a>
+        {{-- Navigation Item --}}
         <a href="{{ route('department') }}" class="{{ Route::is('department') ? 'text-white bg-sky-800' : 'text-sky-950' }} px-4 py-6 flex gap-2 items-center font-semibold text-[1.5rem] shadow-gray-500 shadow-[0_1px_0_0]">
             <div class="w-[3rem] h-[3rem] flex items-center justify-center">
-                <i class="fa-solid fa-building text-[1.8rem]"></i>
+                <i class="fa-solid fa-building-user text-[1.8rem]"></i>
             </div> Departments
         </a>
         {{-- Navigation Item --}}
         <a href="{{ route('division') }}" class="{{ Route::is('division') ? 'text-white bg-sky-800' : 'text-sky-950' }} px-4 py-6 flex gap-2 items-center font-semibold text-[1.5rem] shadow-gray-500 shadow-[0_1px_0_0]">
             <div class="w-[3rem] h-[3rem] flex items-center justify-center">
-                <i class="fa-solid fa-building-user text-[1.8rem]"></i> 
+                <i class="fa-solid fa-people-group text-[1.8rem]"></i> 
             </div> Divisions
         </a>
     </div>

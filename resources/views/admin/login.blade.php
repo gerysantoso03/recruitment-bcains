@@ -11,7 +11,7 @@
                 <div class="border-l-2 border-sky-100 py-4 px-12">
                     <p class="text-[2rem] font-semibold text-sky-800">Sign In</p>
                 </div>
-                <p class="absolute bottom-[2rem] text-align-center text-lg text-red-500">{!! session()->get('error') !!}</p>
+                <p class="absolute bottom-[2rem] text-center text-sm text-red-500">{!! session()->get('error') !!}</p>
             </div>
 
             {{-- Sign In Form Wrapper --}}

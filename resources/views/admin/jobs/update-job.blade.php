@@ -13,7 +13,7 @@
                 <h1 class="font-bold text-sky-900 text-[2.5rem]">Update Job</h1>
             </div>
             {{-- Job Form --}}
-            <form action="{{ route('add.job') }}" method="post" class="border-2 border-sky-900 rounded-lg flex flex-col gap-4 p-4">
+            <form action="{{ route('update.job', $job['id']) }}" method="post" class="border-2 border-sky-900 rounded-lg flex flex-col gap-4 p-4">
                 @csrf
                 {{-- First Section --}}
                 <div class="flex justify-start items-center gap-8">
@@ -95,19 +95,7 @@
     </main>
     <script>
         ClassicEditor
-            .create(document.querySelector('#jobRole'))
-            .catch(error => {
-                console.error(error);
-        });
-
-        ClassicEditor
             .create( document.querySelector( '#jobQualification' ) )
-            .catch( error => {
-                console.error( error );
-        });
-
-        ClassicEditor
-            .create( document.querySelector( '#jobActivities' ) )
             .catch( error => {
                 console.error( error );
         });
