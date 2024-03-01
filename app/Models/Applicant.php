@@ -35,6 +35,7 @@ class Applicant extends Model
         'weight',
         'application_status',
         'application_date',
+        'info_of_job',
         'social_medias',
         'ijazah',
         'transkrip_nilai',

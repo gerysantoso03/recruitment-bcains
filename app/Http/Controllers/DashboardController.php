@@ -13,6 +13,6 @@ class DashboardController extends Controller
 
     public function applicantPage()
     {
-        return view('admin.applicant');
+        return view('admin.applicants.applicant');
     }
 }

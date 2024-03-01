@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('age');
             $table->string('last_education');
             $table->string('employeer_name');
-            $table->string('relation');
             $table->foreignId('applicant_id');
             $table->timestamps();
         });

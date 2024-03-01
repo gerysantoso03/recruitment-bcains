@@ -30,6 +30,7 @@ return new class extends Migration
             $table->integer('weight');
             $table->string('application_status');
             $table->date('application_date')->default(DB::raw('current_date'));
+            $table->string('info_of_job');
             $table->text('social_medias');
             $table->string('ijazah');
             $table->string('transkrip_nilai');
@@ -37,7 +38,8 @@ return new class extends Migration
             $table->string('application_letter');
             $table->string('ktp');
             $table->string('applicant_photo');
-            $table->foreignId('job_id');
+            $table->unsignedBigInteger('job_id');
+            $table->foreign('job_id')->references('id')->on('jobs');
             $table->timestamps();
         });
     }

@@ -19,6 +19,9 @@
   {{-- CKEditor CDN --}}
   <script src="https://cdn.ckeditor.com/ckeditor5/41.1.0/classic/ckeditor.js"></script>
 
+  {{-- Alpine JS CDN --}}
+  {{-- <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script> --}}
+
   {{-- <link rel="shortcut icon" href="{{ asset('images/logo/nisuma-icon.png') }}" type="image/x-icon"> --}}
   <title>Recruitment BCAinsurance</title>
 </head>
@@ -28,7 +31,7 @@
     @if(!(Route::currentRouteName() == 'login') && !(Route::currentRouteName() == 'register'))
       @include('layout.global.admin-sidebar')
     @endif
-    <main class="flex flex-col w-full overflow-scroll">
+    <main class="flex flex-col w-full">
       @if(!(Route::currentRouteName() == 'login') && !(Route::currentRouteName() == 'register'))
         @include('layout.global.admin-navbar')
       @endif
