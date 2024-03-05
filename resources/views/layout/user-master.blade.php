@@ -29,7 +29,7 @@
     <title>Recruitment BCAinsurance</title>
 </head>
 
-<body>
+<body class="soft-scrollbar">
 
     {{-- Header --}}
     @include('layout.global.navbar')

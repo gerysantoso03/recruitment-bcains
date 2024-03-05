@@ -17,17 +17,6 @@ export default {
         "./vendor/wireui/wireui/src/View/**/*.php",
     ],
     theme: {
-        // fontSize: {
-        //     sm: "1rem",
-        //     md: "1.4rem",
-        //     base: "1.6rem",
-        //     lg: "1.8rem",
-        //     xl: "2rem",
-        //     "2xl": "4rem",
-        //     "3xl": "6rem",
-        //     "4xl": "8rem",
-        //     "5xl": "10rem",
-        // },
         extend: {},
     },
     plugins: [require("@tailwindcss/forms")],
