@@ -17,14 +17,11 @@ class ApplicantEducationHistory extends Model
      */
     protected $fillable = [
         'id',
-        'education',
         'education_category',
-        'institution',
-        'institution_address',
-        'major',
+        'education_name',
+        'education_subject',
         'start_year',
         'end_year',
-        'remarks',
         'applicant_id',
     ];
 

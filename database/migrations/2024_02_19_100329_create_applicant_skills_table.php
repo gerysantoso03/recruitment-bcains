@@ -16,7 +16,10 @@ return new class extends Migration
             $table->text('languages');
             $table->text('computers');
             $table->text('organizations');
-            $table->foreignId('applicant_id');
+            $table->text('latest_jobdesc');
+            $table->text('organization_structure');
+            $table->unsignedBigInteger('applicant_id');
+            $table->foreign('applicant_id')->references('id')->on('applicants')->onDelete('cascade');
             $table->timestamps();
         });
     }

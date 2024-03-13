@@ -17,8 +17,7 @@ class ApplicantMedicalHistory extends Model
      */
     protected $fillable = [
         'id',
-        'illness_name',
-        'illness_date',
+        'illness',
         'illness_impact',
         'remarks',
         'applicant_id',

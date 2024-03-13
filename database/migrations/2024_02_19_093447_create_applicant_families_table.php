@@ -15,10 +15,13 @@ return new class extends Migration
             $table->id();
             $table->string('family_name');
             $table->string('gender');
-            $table->string('age');
+            $table->integer('age');
             $table->string('last_education');
+            $table->string('occupation');
             $table->string('employeer_name');
-            $table->foreignId('applicant_id');
+            $table->string('relation');
+            $table->unsignedBigInteger('applicant_id');
+            $table->foreign('applicant_id')->references('id')->on('applicants')->onDelete('cascade');;
             $table->timestamps();
         });
     }

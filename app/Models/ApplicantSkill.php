@@ -20,6 +20,8 @@ class ApplicantSkill extends Model
         'languages',
         'computers',
         'organizations',
+        'latest_jobdesc',
+        'organization_structure',
         'applicant_id',
     ];
 

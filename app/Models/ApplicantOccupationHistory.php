@@ -26,7 +26,8 @@ class ApplicantOccupationHistory extends Model
         'start_year',
         'end_year',
         'reason_of_leaving',
-        'job_desc',
+        'latest_jobdesc',
+        'organization_structure',
         'applicant_id',
     ];
 

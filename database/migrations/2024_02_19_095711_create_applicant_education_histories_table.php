@@ -13,15 +13,13 @@ return new class extends Migration
     {
         Schema::create('applicant_education_histories', function (Blueprint $table) {
             $table->id();
-            $table->string('education');
             $table->string('education_category');
-            $table->string('institution');
-            $table->text('institution_address');
-            $table->string('major');
+            $table->string('education_name');
+            $table->string('education_subject');
             $table->integer('start_year');
             $table->integer('end_year');
-            $table->text('remarks');
-            $table->foreignId('applicant_id');
+            $table->unsignedBigInteger('applicant_id');
+            $table->foreign('applicant_id')->references('id')->on('applicants')->onDelete('cascade');
             $table->timestamps();
         });
     }

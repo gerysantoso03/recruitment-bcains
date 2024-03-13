@@ -22,8 +22,10 @@ return new class extends Migration
             $table->integer('start_year');
             $table->integer('end_year');
             $table->text('reason_of_leaving');
-            $table->text('job_desc');
-            $table->foreignId('applicant_id');
+            $table->text('latest_jobdesc');
+            $table->text('organization_structure');
+            $table->unsignedBigInteger('applicant_id');
+            $table->foreign('applicant_id')->on('id')->references('applicants')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -23,6 +23,7 @@ class ApplicantFamily extends Model
         'last_education',
         'occupation',
         'employeer_name',
+        'relation',
         'applicant_id',
     ];
 

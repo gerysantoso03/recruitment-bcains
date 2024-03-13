@@ -9,13 +9,17 @@ class ApplicantBiodata extends Step
 {
     // Step view located at resources/views/steps/general.blade.php 
     protected string $view = 'applicant.steps.applicant-biodata';
+    public $familyStructures = [];
 
     /*
      * Initialize step fields
      */
     public function mount()
     {
-        $this->mergeState([]);
+        $this->mergeState([
+            'fullname' => $this->model->fullname,
+
+        ]);
     }
 
     /*
