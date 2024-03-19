@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('applicant_education_histories', function (Blueprint $table) {
+        Schema::create('applicant_documents', function (Blueprint $table) {
             $table->id();
-            $table->string('education_category');
-            $table->string('education_name');
-            $table->string('education_subject');
-            $table->string('start_year');
-            $table->string('end_year');
+            $table->string('ijazah');
+            $table->string('transkrip_nilai');
+            $table->string('cv');
+            $table->string('application_letter');
+            $table->string('ktp');
             $table->unsignedBigInteger('applicant_id');
             $table->foreign('applicant_id')->references('id')->on('applicants')->onDelete('cascade');
             $table->timestamps();
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('applicant_education_histories');
+        Schema::dropIfExists('applicant_documents');
     }
 };

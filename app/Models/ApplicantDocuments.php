@@ -6,10 +6,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class ApplicantEducationHistory extends Model
+class ApplicantDocuments extends Model
 {
     use HasFactory;
-
     /**
      * The attributes that are mass assignable.
      *
@@ -17,16 +16,16 @@ class ApplicantEducationHistory extends Model
      */
     protected $fillable = [
         'id',
-        'education_category',
-        'education_name',
-        'education_subject',
-        'start_year',
-        'end_year',
+        'ijazah',
+        'transkrip_nilai',
+        'cv',
+        'application_letter',
+        'ktp',
         'applicant_id',
     ];
 
     /**
-     * Many families belong to one applicant
+     * Medical history belongs to applicant
      */
     public function applicant(): BelongsTo
     {

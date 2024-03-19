@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('reference_name');
             $table->string('reference_relation');
             $table->text('reference_address');
-            $table->integer('phone_number');
+            $table->string('phone_number');
             $table->text('remarks');
             $table->foreignId('applicant_id');
             $table->timestamps();

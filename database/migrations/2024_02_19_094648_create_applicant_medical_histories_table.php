@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('applicant_medical_histories', function (Blueprint $table) {
             $table->id();
             $table->text('illness');
-            $table->text('illness_impact');
-            $table->text('remarks');
+            $table->text('illness_impact')->nullable();
+            $table->text('remarks')->nullable();
             $table->unsignedBigInteger('applicant_id');
             $table->foreign('applicant_id')->references('id')->on('applicants')->onDelete('cascade');
             $table->timestamps();

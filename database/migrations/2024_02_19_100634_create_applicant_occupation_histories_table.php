@@ -13,19 +13,20 @@ return new class extends Migration
     {
         Schema::create('applicant_occupation_histories', function (Blueprint $table) {
             $table->id();
-            $table->string('company_name');
-            $table->text('company_address');
-            $table->integer('company_phone');
-            $table->string('latest_position');
-            $table->integer('salary');
-            $table->string('direct_spv');
-            $table->integer('start_year');
-            $table->integer('end_year');
-            $table->text('reason_of_leaving');
-            $table->text('latest_jobdesc');
-            $table->text('organization_structure');
+            // $table->string('company_name');
+            // $table->text('company_address');
+            // $table->integer('company_phone');
+            // $table->string('latest_position');
+            // $table->integer('salary');
+            // $table->string('direct_spv');
+            // $table->integer('start_year');
+            // $table->integer('end_year');
+            // $table->text('reason_of_leaving');
+            $table->text('occupations');
+            $table->text('latest_jobdesc')->nullable();
+            $table->text('organization_structure')->nullable();
             $table->unsignedBigInteger('applicant_id');
-            $table->foreign('applicant_id')->on('id')->references('applicants')->onDelete('cascade');
+            $table->foreign('applicant_id')->references('id')->on('applicants')->onDelete('cascade');
             $table->timestamps();
         });
     }

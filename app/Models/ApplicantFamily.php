@@ -32,6 +32,6 @@ class ApplicantFamily extends Model
      */
     public function applicant(): BelongsTo
     {
-        return $this->belongsTo(Applicant::class(), 'applicant_id');
+        return $this->belongsTo(Applicant::class, 'applicant_id');
     }
 }
