@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Validation\Rules\Password;
 
 class AuthController extends Controller
 {
@@ -46,7 +47,7 @@ class AuthController extends Controller
             'username' => 'required|unique:users',
             'email' => 'required|email|unique:users',
             'phone_number' => 'required|regex:/[0-9]/|min:11|max:13',
-            'password' => 'required|min:8'
+            'password' => ['required', Password::min(8)->mixedCase()->symbols()]
         ]);
 
         // Get request input

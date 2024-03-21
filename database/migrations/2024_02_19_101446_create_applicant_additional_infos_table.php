@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('applicant_additional_infos', function (Blueprint $table) {
             $table->id();
             $table->longText('additional_info');
-            $table->foreignId('applicant_id');
+            $table->unsignedBigInteger('applicant_id');
+            $table->foreign('applicant_id')->references('id')->on('applicants')->onDelete('cascade');
             $table->timestamps();
         });
     }

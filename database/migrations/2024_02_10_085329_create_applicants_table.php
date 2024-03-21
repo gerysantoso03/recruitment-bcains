@@ -23,21 +23,19 @@ return new class extends Migration
             $table->string('religion');
             $table->string('gender');
             $table->string('marital_status');
-            $table->integer('ktp_number')->unique();
+            $table->string('ktp_number')->unique();
             $table->string('hobby');
             $table->string('blood_type');
             $table->integer('height');
             $table->integer('weight');
-            $table->string('application_status');
+            $table->string('application_status')->default('SENT');
             $table->date('application_date')->default(DB::raw('current_date'));
+            $table->string('info_of_job');
             $table->text('social_medias');
-            $table->string('ijazah');
-            $table->string('transkrip_nilai');
-            $table->string('cv');
-            $table->string('application_letter');
-            $table->string('ktp');
             $table->string('applicant_photo');
-            $table->foreignId('job_id');
+            $table->boolean('term_and_co')->default(false);
+            $table->unsignedBigInteger('job_id');
+            $table->foreign('job_id')->references('id')->on('jobs');
             $table->timestamps();
         });
     }

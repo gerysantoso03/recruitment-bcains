@@ -35,13 +35,10 @@ class Applicant extends Model
         'weight',
         'application_status',
         'application_date',
+        'info_of_job',
         'social_medias',
-        'ijazah',
-        'transkrip_nilai',
-        'cv',
-        'application_letter',
-        'ktp',
         'applicant_photo',
+        'term_and_co',
         'job_id',
     ];
 
@@ -50,7 +47,7 @@ class Applicant extends Model
      */
     public function job(): BelongsTo
     {
-        return $this->belongsTo(Job::class(), 'job_id');
+        return $this->belongsTo(Job::class, 'job_id');
     }
 
     /**
@@ -58,7 +55,7 @@ class Applicant extends Model
      */
     public function applicantFamilies(): HasMany
     {
-        return $this->hasMany(ApplicantFamily::class());
+        return $this->hasMany(ApplicantFamily::class);
     }
 
     /**
@@ -66,7 +63,7 @@ class Applicant extends Model
      */
     public function applicantMedicalHistories(): HasMany
     {
-        return $this->hasMany(ApplicantMedicalHistory::class());
+        return $this->hasMany(ApplicantMedicalHistory::class);
     }
 
     /**
@@ -74,7 +71,7 @@ class Applicant extends Model
      */
     public function applicantEducationHistories(): HasMany
     {
-        return $this->hasMany(ApplicantEducationHistory::class());
+        return $this->hasMany(ApplicantEducationHistory::class);
     }
 
     /**
@@ -82,7 +79,7 @@ class Applicant extends Model
      */
     public function applicantSkills(): HasMany
     {
-        return $this->hasMany(ApplicantSkill::class());
+        return $this->hasMany(ApplicantSkill::class);
     }
 
     /**
@@ -90,7 +87,7 @@ class Applicant extends Model
      */
     public function applicantOccupationHistories(): HasMany
     {
-        return $this->hasMany(ApplicantOccupationHistory::class());
+        return $this->hasMany(ApplicantOccupationHistory::class);
     }
 
     /**
@@ -98,7 +95,7 @@ class Applicant extends Model
      */
     public function applicantReferences(): HasMany
     {
-        return $this->hasMany(ApplicantReference::class());
+        return $this->hasMany(ApplicantReference::class);
     }
 
     /**
@@ -106,6 +103,14 @@ class Applicant extends Model
      */
     public function applicantAdditionalInfo(): HasOne
     {
-        return $this->hasOne(ApplicantAdditionalInfo::class());
+        return $this->hasOne(ApplicantAdditionalInfo::class);
+    }
+
+    /**
+     * One applicant can had multiple files
+     */
+    public function applicantDocuments(): HasOne
+    {
+        return $this->hasOne(ApplicantDocuments::class);
     }
 }

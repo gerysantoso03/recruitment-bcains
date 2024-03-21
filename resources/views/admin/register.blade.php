@@ -20,47 +20,54 @@
                     @csrf
                     {{-- Input Wrapper --}}
                     <div class="flex flex-col gap-4 w-full">
-                        <label class="text-sky-800 font-semibold text-base" for="username">Username</label>
-                        <input type="text" placeholder="Exp: bobbydut, adminbcai, hcbcains" class="text-[1.4rem] p-4 border border-sky-900 rounded-xl border-black" name="username">
+                        <label class="text-sky-800 font-semibold text-[1.4rem]" for="username">Username</label>
+                        <input type="text" placeholder="Exp: bobbydut, adminbcai, hcbcains"
+                            class="text-[1.4rem] p-4 border border-sky-900 rounded-xl" name="username">
                         @if ($errors->has('username'))
                             <span class="text-red-500 text-sm">{{ $errors->first('username') }}</span>
                         @endif
                     </div>
                     {{-- Input Wrapper --}}
                     <div class="flex flex-col gap-4 w-full">
-                        <label class="text-sky-800 font-semibold text-base" for="email">Email</label>
-                        <input placeholder="bobbydut@gmail.com" class="text-[1.4rem] p-4 border border-sky-900 rounded-xl border-black" type="email" name="email">
+                        <label class="text-sky-800 font-semibold text-[1.4rem]" for="email">Email</label>
+                        <input placeholder="bobbydut@gmail.com" class="text-[1.4rem] p-4 border border-sky-900 rounded-xl"
+                            type="email" name="email">
                         @if ($errors->has('email'))
                             <span class="text-red-500 text-sm">{{ $errors->first('email') }}</span>
                         @endif
                     </div>
                     {{-- Input Wrapper --}}
                     <div class="flex flex-col gap-4 w-full">
-                        <label class="text-sky-800 font-semibold text-base" for="phone_number">Phone Number</label>
-                        <input placeholder="0849394039302" class="text-[1.4rem] p-4 border border-sky-900 rounded-xl border-black" type="text" name="phone_number">
+                        <label class="text-sky-800 font-semibold text-[1.4rem]" for="phone_number">Phone Number</label>
+                        <input placeholder="0849394039302" class="text-[1.4rem] p-4 border border-sky-900 rounded-xl"
+                            type="text" name="phone_number">
                         @if ($errors->has('phone_number'))
                             <span class="text-red-500 text-sm">{{ $errors->first('phone_number') }}</span>
                         @endif
                     </div>
                     {{-- Input Wrapper --}}
                     <div class="flex flex-col gap-4 w-full mb-8">
-                        <label class="text-sky-800 font-semibold text-base" for="password">Password</label>
-                        <input placeholder="Password" class="text-[1.4rem] p-4 border border-sky-900 rounded-xl border-black" type="password" name="password">
+                        <label class="text-sky-800 font-semibold text-[1.4rem]" for="password">Password</label>
+                        <input placeholder="Password" class="text-[1.4rem] p-4 border border-sky-900 rounded-xl"
+                            type="password" name="password">
                         @if ($errors->has('password'))
                             <span class="text-red-500 text-sm">{{ $errors->first('password') }}</span>
                         @endif
                     </div>
                     {{-- Button Wrapper --}}
                     <div class="flex items-center justify-center">
-                        <button name="submit" class="bg-sky-800 text-white px-20 py-4 rounded-full text-[1.4rem]">Register</button>
+                        <button name="submit"
+                            class="bg-sky-800 text-white px-20 py-4 rounded-full text-[1.4rem]">Register</button>
                     </div>
-                    <p class="text-center text-sky-900 text-[1.2rem]">Already have an Account? <a class="text-sky-500" href="{{ route('login') }}">Sign In!</a></p>
+                    <p class="text-center text-sky-900 text-[1.2rem]">Already have an Account? <a class="text-sky-500"
+                            href="{{ route('login') }}">Sign In!</a></p>
                 </form>
             </div>
         </div>
         {{-- Login Page Ilustration --}}
         <div class="flex-1">
-            <img src="{{ asset('images/recruitment.png') }}" class="object-cover h-full w-full" alt="Sign In Recruitment Photo">
+            <img src="{{ asset('images/recruitment.png') }}" class="object-cover h-full w-full"
+                alt="Sign In Recruitment Photo">
         </div>
     </main>
 @endsection

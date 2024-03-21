@@ -17,16 +17,18 @@ class ApplicantOccupationHistory extends Model
      */
     protected $fillable = [
         'id',
-        'company_name',
-        'company_address',
-        'company_phone',
-        'latest_position',
-        'salary',
-        'direct_spv',
-        'start_year',
-        'end_year',
-        'reason_of_leaving',
-        'job_desc',
+        // 'company_name',
+        // 'company_address',
+        // 'company_phone',
+        // 'latest_position',
+        // 'salary',
+        // 'direct_spv',
+        // 'start_year',
+        // 'end_year',
+        // 'reason_of_leaving',
+        'occupations',
+        'latest_jobdesc',
+        'organization_structure',
         'applicant_id',
     ];
 

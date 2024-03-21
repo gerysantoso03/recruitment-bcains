@@ -18,22 +18,26 @@
             <div class="rounded flex flex-col gap-4">
                 {{-- Form Header --}}
                 <div class="p-4">
-                    <h3 class="text-sky-900 font-bold text-[3rem]">Welcome Back! <span class="text-sky-700 text-[3rem]"><i class="fa-solid fa-hands"></i></span></h3>
-                    <p class="text-[1.4rem] text-sky-800 font-semibold">Sign in to dive into dashboard and get the stats.</p>
+                    <h3 class="text-sky-900 font-bold text-[3rem]">Welcome Back! <span class="text-sky-700 text-[3rem]"><i
+                                class="fa-solid fa-hands"></i></span></h3>
+                    <p class="text-[1.4rem] text-sky-800 font-semibold">Sign in to dive into dashboard and get the stats.
+                    </p>
                 </div>
                 {{-- Sign In Form --}}
                 <form action="{{ route('login.user') }}" method="post" class="p-4 flex flex-col gap-4">
                     @csrf
                     <div class="flex flex-col gap-4 w-full">
-                        <label class="text-sky-800 font-semibold text-xl" for="username">Username</label>
-                        <input type="text" name="username" placeholder="Exp: bobbydut, adminbcai, hcbcains" class="text-[1.4rem] p-4 border border-sky-900 rounded-xl border-black">
+                        <label class="text-sky-800 font-semibold text-[1.4rem]" for="username">Username</label>
+                        <input type="text" name="username" placeholder="Exp: bobbydut, adminbcai, hcbcains"
+                            class="text-[1.4rem] p-4 border border-sky-900 rounded-xl">
                         @if ($errors->has('username'))
                             <span class="text-red-500 text-sm">{{ $errors->first('username') }}</span>
                         @endif
                     </div>
                     <div class="flex flex-col gap-4 w-full mb-8">
-                        <label class="text-sky-800 font-semibold text-xl" for="password">Password</label>
-                        <input placeholder="Password" name="password" class="text-[1.4rem] p-4 border border-sky-900 rounded-xl border-black" type="password">
+                        <label class="text-sky-800 font-semibold text-[1.4rem]" for="password">Password</label>
+                        <input placeholder="Password" name="password"
+                            class="text-[1.4rem] p-4 border border-sky-900 rounded-xl" type="password">
                         @if ($errors->has('password'))
                             <span class="text-red-500 text-sm">{{ $errors->first('password') }}</span>
                         @endif
@@ -41,13 +45,15 @@
                     <div class="flex items-center justify-center">
                         <button class="bg-sky-800 text-white px-20 py-4 rounded-full text-[1.4rem]">Sign In</button>
                     </div>
-                    <p class="text-center text-sky-900 text-[1.2rem]">Don't have an Account yet? <a class="text-sky-500" href="{{ route('register') }}">Create One!</a></p>
+                    <p class="text-center text-sky-900 text-[1.2rem]">Don't have an Account yet? <a class="text-sky-500"
+                            href="{{ route('register') }}">Create One!</a></p>
                 </form>
             </div>
         </div>
         {{-- Login Page Ilustration --}}
         <div class="flex-1">
-            <img src="{{ asset('images/recruitment.png') }}" class="object-cover h-full w-full" alt="Sign In Recruitment Photo">
+            <img src="{{ asset('images/recruitment.png') }}" class="object-cover h-full w-full"
+                alt="Sign In Recruitment Photo">
         </div>
     </main>
 @endsection
