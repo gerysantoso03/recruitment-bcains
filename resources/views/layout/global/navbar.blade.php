@@ -1,18 +1,18 @@
-<header id="navbar" class="h-14 sm:h-6 md:h-10 lg:h-14 fixed-navbar flex items-center justify-between border-2 border-dark p-4 bg-slate-50">
+<header id="navbar" class="h-20 sm:h-10 md:h-14 fixed-navbar flex items-center justify-between border-2 border-dark p-4 bg-slate-50">
   <!-- Navbar Logo -->
   <section>
-    <div class="w-64 sm:w-28 md:w-40 lg:w-64">
+    <div class="w-80 sm:w-36 md:w-52">
       <img src="{{ asset('images/logo.png') }}" alt="Logo" class="p-1 w-10/12">
     </div>
   </section>
   <!-- Navbar Content -->
   <section>
-    <div class=" text-lg sm:text-xs md:text-sm lg:text-lg">
-      <nav class="flex gap-x-20 sm:gap-x-5 md:gap-x-10 font-sans font-bold text-sky-900">
-        <a href="" class="active">Home</a>
-        <a href="#jobs">Jobs</a>
-        <a href="#benefits">Benefits</a>
-        <a href="#process">Process</a>
+    <div class=" text-lg sm:text-sm md:text-base lg:text-lg">
+      <nav class="flex gap-x-20 sm:gap-x-10 md:gap-x-16 font-sans font-bold text-sky-900">
+        <a href="{{ route('home')}}" class="active">Home</a>
+        <a href="{{ route('home')}}#benefits">Benefits</a>
+        <a href="{{ route('home')}}#process">Process</a>
+        <a href="{{ route('home')}}#jobs">Jobs</a>
       </nav>
     </div>
   </section>

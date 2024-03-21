@@ -26,9 +26,9 @@ use App\Http\Controllers\JobController;
 Route::get('/login', [AuthController::class, 'loginPage'])->name('login');
 Route::get('/register', [AuthController::class, 'registerPage'])->name('register');
 Route::get('/logout', [AuthController::class, 'signOut'])->name('logout');
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/', [JobController::class, 'renderAllJobsHome'])->name('home');
+Route::get('/job-detail-applicant/{id}', [JobController::class, 'renderJobDetailApplicant'])->name('job-detail-applicant');
+
 // Routes Authentication
 Route::post('/register-user', [AuthController::class, 'registerNewUser'])->name('register.user');
 Route::post('/login-user', [AuthController::class, 'signInVerification'])->name('login.user');
