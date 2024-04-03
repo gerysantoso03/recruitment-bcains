@@ -41,16 +41,20 @@
                     <x-datetime-picker label="Birth Date" placeholder="Birth Date" wire:model="birth_date"
                         without-time />
                     <x-input wire:model="birth_place" label="Birth Place" corner-hint="Ex: Jakarta, Bali" />
-                    <x-input label="Mobile Phone" wire:model="cell_phone" corner-hint="Ex: 087888392032" />
-                    <x-input label="Home Telephone" wire:model="home_phone" corner-hint="Ex: 02189430233" />
+                    <x-inputs.maskable label="Mobile Phone" mask="####-####-####" wire:model="cell_phone"
+                        corner-hint="Ex: 081222342829" />
+                    <x-inputs.maskable label="Home Telephone" mask="(###) #######" wire:model="home_phone"
+                        corner-hint="Ex: 0217389239" />
                 </div>
                 {{-- General Info - Second Section - Second Wrapper --}}
                 <div class="flex flex-col flex-1 gap-4">
                     <x-select label="Religion" wire:model="religion" placeholder="Select one religion"
                         :options="['Katolik', 'Kristen Protestan', 'Islam', 'Hindu', 'Buddha', 'Khonghucu']" />
                     <x-select label="Gender" wire:model="gender" placeholder="Select one gender" :options="['Male', 'Female', 'Others']" />
-                    <x-input label="Parent's Telephone" wire:model="parent_phone" corner-hint="Ex: 087888392032" />
-                    <x-input label="Office Telephone" wire:model="office_phone" corner-hint="Ex: 02189430233" />
+                    <x-inputs.maskable label="Parent's Telephone" mask="####-####-####" wire:model="parent_phone"
+                        corner-hint="Ex: 081222342829" />
+                    <x-inputs.maskable label="Office Telephone" mask="(###) #######" wire:model="office_phone"
+                        corner-hint="Ex: 0217389239" />
                 </div>
             </div>
             {{-- General Info - Third Section --}}
@@ -61,12 +65,13 @@
                         :options="['Single', 'Married']" />
                     <x-select label="Blood Type" wire:model="blood_type" placeholder="Select one type"
                         :options="['O', 'A', 'B', 'AB']" />
-                    <x-inputs.number wire:model="height" placeholder="0" label="Height" corner-hint="cm" />
-                    <x-inputs.number wire:model="weight" label="Weight" placeholder="0" corner-hint="kg" />
+                    <x-inputs.maskable mask="###" wire:model="height" label="Height" />
+                    <x-inputs.maskable mask="###" wire:model="weight" label="Weight" />
                 </div>
                 {{-- General Info - Third Section - Second Wrapper --}}
                 <div class="flex flex-col flex-1 gap-4">
-                    <x-input wire:model="ktp_number" label="No. KTP" corner-hint="Must be in 16 digit number" />
+                    <x-inputs.maskable mask="################" wire:model="ktp_number" label="No. KTP"
+                        corner-hint="Must be in 16 digit number" />
                     <x-input wire:model="hobby" label="Hobby" corner-hint="Ex: Soccer, Cycling, Boxing" />
                     <x-input label="Instagram" wire:model="instagram" corner-hint="Ex: santi20" />
                     <x-input label="Tiktok/Others" wire:model="tiktok" corner-hint="Ex: SantiTiktokers" />
@@ -99,7 +104,7 @@
                             <tr
                                 class="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600">
                                 <td class="whitespace-nowrap px-6 py-4">
-                                    <x-select placeholder="Select relation" :options="['Spouse', 'Child', 'Father']"
+                                    <x-select placeholder="Select relation" :options="['Spouse', 'Child', 'Father', 'Mother', 'Sibling']"
                                         wire:model.defer="f_relation" />
                                 </td>
                                 <td class="whitespace-nowrap px-6 py-4 font-medium">
@@ -110,7 +115,7 @@
                                         wire:model.defer="f_gender" />
                                 </td>
                                 <td class="whitespace-nowrap px-6 py-4">
-                                    <x-inputs.number placeholder="0" wire:model="f_age" />
+                                    <x-inputs.maskable mask="###" wire:model="f_age" />
                                 </td>
                                 <td class="whitespace-nowrap px-6 py-4">
                                     <x-input wire:model="f_last_education" />
@@ -262,6 +267,9 @@
             {{-- Applicant education history section --}}
             <div class="flex flex-col gap-2">
                 <h3 class="text-[2rem] text-sky-900 font-semibold">Educational Background</h3>
+                @error('applicantEducationHistories')
+                    <span class="text-sm text-red-500">{{ $message }}</span>
+                @enderror
                 <div class="border border-sky-900 p-4 rounded-lg">
                     {{-- Applicant Education histories Table --}}
                     <div class="flex flex-col">
@@ -293,10 +301,10 @@
                                         <x-input wire:model="education_subject" />
                                     </td>
                                     <td class="whitespace-nowrap px-6 py-4 font-medium w-[10%]">
-                                        <x-input wire:model="education_start_year" />
+                                        <x-inputs.maskable mask="####" wire:model="education_start_year" />
                                     </td>
                                     <td class="whitespace-nowrap px-6 py-4 font-medium w-[10%]">
-                                        <x-input wire:model="education_end_year" />
+                                        <x-inputs.maskable mask="####" wire:model="education_end_year" />
                                     </td>
                                     <td class="whitespace-nowrap px-6 py-4">
                                         <div wire:click.prevent="addNewApplicantEducation"
@@ -560,9 +568,9 @@
             <div class="flex flex-col gap-2">
                 <div class="flex items-center justify-between relative">
                     <div class="flex items-center justify-between gap-4">
-                        <x-input wire:model="work_start_year" placeholder="Start year" />
+                        <x-inputs.maskable mask="####" wire:model="work_start_year" placeholder="Start year" />
                         <i class="fa-solid fa-minus"></i>
-                        <x-input wire:model="work_end_year" placeholder="End year" />
+                        <x-inputs.maskable mask="####" wire:model="work_end_year" placeholder="End year" />
                     </div>
                     <div wire:click.prevent="addNewApplicantOccupation()"
                         class="flex items-center justify-center gap-1 cursor-pointer text-[1.2rem] text-sky-800 border border-sky-900 p-2 rounded-lg font-semibold hover:text-sky-600 hover:border-sky-600 duration-750">
@@ -573,11 +581,12 @@
                     <div class="flex flex-col gap-2 flex-1">
                         <x-input label="Company Name" wire:model="company_name" />
                         <x-input label="Address" wire:model="company_address" />
-                        <x-input label="Company Phone Number" wire:model="company_phone" />
+                        <x-inputs.maskable mask="(###) #######" label="Company Phone Number"
+                            wire:model="company_phone" />
                     </div>
                     <div class="flex flex-col gap-2 flex-1">
                         <x-input label="Latest Position" wire:model="latest_position" />
-                        <x-input label="Salary" wire:model="salary" />
+                        <x-input label="Salary" wire:model="salary" corner-hint="Ex: 6000000" />
                         <x-input label="Direct Supervisor" wire:model="direct_spv" />
                     </div>
                 </div>
@@ -678,7 +687,7 @@
                                     <x-input wire:model="reference_address" />
                                 </td>
                                 <td class="whitespace-nowrap px-6 py-4 font-medium">
-                                    <x-input wire:model="reference_phone_number" />
+                                    <x-inputs.maskable mask="####-####-####" wire:model="reference_phone_number" />
                                 </td>
                                 <td class="whitespace-nowrap px-6 py-4 font-medium">
                                     <x-input wire:model="reference_remarks" />
@@ -907,7 +916,7 @@
             {{-- Documents --}}
             <div class="flex justify-around items-center">
                 <div class="flex flex-col gap-2">
-                    <p class="text-[1.2rem] font-semibold text-sky-900">Ijazah</p>
+                    <p class="text-[1.2rem] font-semibold text-sky-900">Ijazah / Bukti Kelulusan</p>
                     <input
                         class="block text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
                         wire:model="ijazah" id="file_input" type="file" />

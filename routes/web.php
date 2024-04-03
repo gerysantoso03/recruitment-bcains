@@ -43,6 +43,8 @@ Route::group(['middleware' => ['auth']], function () {
         // Route Dashboards
         Route::get('/admin-dashboard', [DashboardController::class, 'dashboardPage'])->name('dashboard');
         Route::get('/admin-applicant', [DashboardController::class, 'applicantPage'])->name('applicant');
+        // Route Applicants
+        Route::get('/admin-applicant-detail/{id}', [ApplicantController::class, 'renderApplicantDetail'])->name('applicant.detail.admin');
         // Route Jobs
         Route::get('/admin-job', [JobController::class, 'renderAllJobs'])->name('job');
         Route::get('/admin-job/add-job-form', [JobController::class, 'renderAddJobForm'])->name('add.job.form');

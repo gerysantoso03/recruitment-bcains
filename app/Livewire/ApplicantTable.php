@@ -28,54 +28,77 @@ final class ApplicantTable extends PowerGridComponent
             Exportable::make('export')
                 ->striped()
                 ->type(Exportable::TYPE_XLS, Exportable::TYPE_CSV),
-            Header::make()->showSearchInput(),
+            Header::make()->showToggleColumns()->showSearchInput(),
             Footer::make()
                 ->showPerPage()
                 ->showRecordCount(),
         ];
     }
 
+    public function header(): array
+    {
+        return [];
+    }
+
+    protected function getListeners()
+    {
+        return array_merge(
+            parent::getListeners(),
+            [
+                'eventX',
+                'eventY',
+            ]
+        );
+    }
+
+    public function bulkUpdateApplicantStatus()
+    {
+        if (count($this->checkboxValues) == 0) {
+            return redirect('/admin-applicant')->with('failed', 'You must select at least one item!!');
+        }
+
+        Applicant::whereIn('id', $this->checkboxValues)->delete();
+
+        return redirect('/admin-job')->with('success', 'Successfully delete selected job!!');
+    }
+
+
     public function datasource(): Builder
     {
-        return Applicant::query();
+        return Applicant::query()->with('job');
     }
 
     public function relationSearch(): array
     {
-        return [];
+        return [
+            'job' => ['position_name']
+        ];
     }
 
     public function fields(): PowerGridFields
     {
         return PowerGrid::fields()
-            ->add('id')
+            ->add('application_status_id', fn (Applicant $model) => $model->applicationStatus->status)
             ->add('fullname')
             ->add('email')
-            ->add('birth_date_formatted', fn (Applicant $model) => Carbon::parse($model->birth_date)->format('d/m/Y'))
-            ->add('birth_place')
-            ->add('address')
-            ->add('applicant_phones')
-            ->add('religion')
+            ->add('application_date_formatted', fn (Applicant $model) => Carbon::parse($model->application_date)->toFormattedDateString())
+            ->add('age')
+            ->add('applicant_phones', function (Applicant $model) {
+                $phones = json_decode($model->applicant_phones, true);
+                return $phones['cell_phone'];
+            })
             ->add('gender')
-            ->add('marital_status')
             ->add('ktp_number')
-            ->add('hobby')
-            ->add('blood_type')
-            ->add('height')
-            ->add('weight')
-            ->add('application_status')
-            ->add('application_date_formatted', fn (Applicant $model) => Carbon::parse($model->application_date)->format('d/m/Y'))
-            ->add('info_of_job')
-            ->add('social_medias')
-            ->add('applicant_photo')
-            ->add('term_and_co')
-            ->add('job_id');
+            ->add('job_id', fn (Applicant $model) => $model->job->position_name);
     }
 
     public function columns(): array
     {
         return [
-            Column::make('Id', 'id'),
+            Column::action('Action'),
+            Column::make('Status', 'application_status_id')
+                ->sortable()
+                ->searchable(),
             Column::make('Fullname', 'fullname')
                 ->sortable()
                 ->searchable(),
@@ -84,79 +107,22 @@ final class ApplicantTable extends PowerGridComponent
                 ->sortable()
                 ->searchable(),
 
-            Column::make('Birth date', 'birth_date_formatted', 'birth_date')
-                ->sortable(),
-
-            Column::make('Birth place', 'birth_place')
-                ->sortable()
-                ->searchable(),
-
-            Column::make('Address', 'address')
-                ->sortable()
-                ->searchable(),
-
-            Column::make('Applicant phones', 'applicant_phones')
-                ->sortable()
-                ->searchable(),
-
-            Column::make('Religion', 'religion')
-                ->sortable()
-                ->searchable(),
-
-            Column::make('Gender', 'gender')
-                ->sortable()
-                ->searchable(),
-
-            Column::make('Marital status', 'marital_status')
-                ->sortable()
-                ->searchable(),
-
-            Column::make('Ktp number', 'ktp_number')
-                ->sortable()
-                ->searchable(),
-
-            Column::make('Hobby', 'hobby')
-                ->sortable()
-                ->searchable(),
-
-            Column::make('Blood type', 'blood_type')
-                ->sortable()
-                ->searchable(),
-
-            Column::make('Height', 'height')
-                ->sortable()
-                ->searchable(),
-
-            Column::make('Weight', 'weight')
-                ->sortable()
-                ->searchable(),
-
-            Column::make('Application status', 'application_status')
-                ->sortable()
-                ->searchable(),
-
             Column::make('Application date', 'application_date_formatted', 'application_date')
                 ->sortable(),
 
-            Column::make('Info of job', 'info_of_job')
+            Column::make('Age', 'age')
+                ->sortable(),
+
+            Column::make('Phone Number', 'applicant_phones')
                 ->sortable()
                 ->searchable(),
 
-            Column::make('Social medias', 'social_medias')
+            Column::make('KTP', 'ktp_number')
                 ->sortable()
                 ->searchable(),
 
-            Column::make('Applicant photo', 'applicant_photo')
-                ->sortable()
-                ->searchable(),
+            Column::make('Job', 'job_id'),
 
-            Column::make('Term and co', 'term_and_co')
-                ->sortable()
-                ->searchable(),
-
-            Column::make('Job id', 'job_id'),
-
-            Column::action('Action')
         ];
     }
 
@@ -165,6 +131,9 @@ final class ApplicantTable extends PowerGridComponent
         return [
             Filter::datepicker('birth_date'),
             Filter::datepicker('application_date'),
+            Filter::number('age', 'age')
+                ->thousands('.')
+                ->decimal(','),
         ];
     }
 
@@ -177,11 +146,10 @@ final class ApplicantTable extends PowerGridComponent
     public function actions(Applicant $row): array
     {
         return [
-            Button::add('edit')
-                ->slot('Edit: ' . $row->id)
-                ->id()
-                ->class('pg-btn-white dark:ring-pg-primary-600 dark:border-pg-primary-600 dark:hover:bg-pg-primary-700 dark:ring-offset-pg-primary-800 dark:text-pg-primary-300 dark:bg-pg-primary-700')
-                ->dispatch('edit', ['rowId' => $row->id])
+            Button::add('show')
+                ->slot('<i class="fa-solid fa-eye text-sky-800"></i>')
+                ->class('pg-btn-white')
+                ->route('applicant.detail.admin', ['id' => $row->id]),
         ];
     }
 

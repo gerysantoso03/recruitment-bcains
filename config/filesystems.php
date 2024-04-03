@@ -72,11 +72,11 @@ return [
     'links' => [
         public_path('storage') => storage_path('app/public'),
         public_path('images') => storage_path('app/images'),
-        public_path('applicant-photos') => storage_path('app/applicant-photos'),
+        public_path('applicantPhotos') => storage_path('app/applicantPhotos'),
         public_path('ijazah') => storage_path('app/ijazah'),
-        public_path('transkrip-nilai') => storage_path('app/transkrip-nilai'),
+        public_path('transkripNilai') => storage_path('app/transkripNilai'),
         public_path('cv') => storage_path('app/cv'),
-        public_path('application-letter') => storage_path('app/application-letter'),
+        public_path('applicationLetters') => storage_path('app/applicationLetters'),
         public_path('ktp') => storage_path('app/ktp')
     ],
 
