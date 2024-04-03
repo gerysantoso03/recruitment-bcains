@@ -20,6 +20,23 @@ class JobController extends Controller
         return view('admin.jobs.job', compact('jobs'));
     }
 
+    // Render all jobs into home page
+    public function renderAllJobsHome()
+    {
+        $jobs = Job::with(['department', 'branch'])->get();
+
+        return view('home', compact('jobs'));
+    }
+
+    public function renderJobDetailApplicant($id)
+    {
+        // Retrieve job detail with given id
+        $job = Job::findOrFail($id);
+
+        // Send data to view
+        return view('job-detail-applicant', compact('job'));
+    }
+
     public function renderJobDetailAdmin($id)
     {
         // Retrieve job detail with given id
