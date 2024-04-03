@@ -18,14 +18,22 @@ export default {
     ],
     theme: {
         screens: {
-            xl: { max: '1440px' },
-            lg: { max: '1024px' },
-            md: { max: '768px' },
-            sm: { max: '548px' }
+            xl: { max: "1440px" },
+            lg: { max: "1024px" },
+            md: { max: "768px" },
+            sm: { max: "548px" },
         },
         extend: {},
         fontSize: {
-            sm: "1rem",
+            sm: "1.2rem",
+            md: "1.4rem",
+            base: "1.8rem",
+            lg: "2rem",
+            xl: "2.4rem",
+            "2xl": "2.8rem",
+            "3xl": "4rem",
+            "4xl": "6rem",
+            "5xl": "8rem",
         },
     },
     plugins: [require("@tailwindcss/forms")],

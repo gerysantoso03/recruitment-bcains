@@ -12,7 +12,7 @@
                     <x-input wire:model="email" label="Email" corner-hint="Ex: gery@yahoo.com" />
                     <x-input wire:model="address" label="Address"
                         corner-hint="Ex: Jl. Kaliurang No.20, Kebayoran, Jakarta" />
-                    <x-input wire:model="job_id" label="Position Applied" />
+                    <x-input wire:model="job_id" readonly label="Position Applied" />
                     <x-input wire:model="info_of_job" label="Information of Job"
                         corner-hint="Ex: Linkedin, Instagram, Job Street" />
                 </div>
@@ -27,7 +27,7 @@
                         @endif
                     </div>
                     <input
-                        class="block text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                        class="block text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
                         wire:model="applicant_photo" name="applicant_photo" id="file_input" type="file" />
                     @error('applicant_photo')
                         <span class="text-red-500 text-sm">{{ $message }}</span>
@@ -47,7 +47,7 @@
                 {{-- General Info - Second Section - Second Wrapper --}}
                 <div class="flex flex-col flex-1 gap-4">
                     <x-select label="Religion" wire:model="religion" placeholder="Select one religion"
-                        :options="['Katolik', 'Kristen Protestan', 'Islam', 'Hindu', 'Budha', 'Konghucu']" />
+                        :options="['Katolik', 'Kristen Protestan', 'Islam', 'Hindu', 'Buddha', 'Khonghucu']" />
                     <x-select label="Gender" wire:model="gender" placeholder="Select one gender" :options="['Male', 'Female', 'Others']" />
                     <x-input label="Parent's Telephone" wire:model="parent_phone" corner-hint="Ex: 087888392032" />
                     <x-input label="Office Telephone" wire:model="office_phone" corner-hint="Ex: 02189430233" />
@@ -61,8 +61,8 @@
                         :options="['Single', 'Married']" />
                     <x-select label="Blood Type" wire:model="blood_type" placeholder="Select one type"
                         :options="['O', 'A', 'B', 'AB']" />
-                    <x-inputs.number wire:model="height" placeholder="0" label="Height" />
-                    <x-inputs.number wire:model="weight" label="Weight" placeholder="0" />
+                    <x-inputs.number wire:model="height" placeholder="0" label="Height" corner-hint="cm" />
+                    <x-inputs.number wire:model="weight" label="Weight" placeholder="0" corner-hint="kg" />
                 </div>
                 {{-- General Info - Third Section - Second Wrapper --}}
                 <div class="flex flex-col flex-1 gap-4">

@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Events\StepChanged;
 use App\Models\Applicant;
+use App\Models\Job;
 use App\Models\ApplicantFamily;
 use Livewire\Component;
 use Livewire\Features\SupportFileUploads\WithFileUploads;

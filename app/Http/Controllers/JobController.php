@@ -25,19 +25,16 @@ class JobController extends Controller
     {
         $jobs = Job::with(['department', 'branch'])->get();
 
-        return view('home',compact('jobs'));
+        return view('home', compact('jobs'));
     }
 
     public function renderJobDetailApplicant($id)
-    {  
+    {
         // Retrieve job detail with given id
         $job = Job::findOrFail($id);
 
-        if ($job) {
-            return view('job-detail-applicant', compact('job'));
-        }
-
-        return redirect()->back()->with('Failed', "Job is not exists!!");
+        // Send data to view
+        return view('job-detail-applicant', compact('job'));
     }
 
     public function renderJobDetailAdmin($id)
