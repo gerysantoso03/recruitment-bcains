@@ -22,6 +22,7 @@ class Applicant extends Model
         'fullname',
         'email',
         'birth_date',
+        'age',
         'birth_place',
         'address',
         'applicant_phones',
@@ -40,6 +41,7 @@ class Applicant extends Model
         'applicant_photo',
         'term_and_co',
         'job_id',
+        'application_status_id',
     ];
 
     /**
@@ -112,5 +114,13 @@ class Applicant extends Model
     public function applicantDocuments(): HasOne
     {
         return $this->hasOne(ApplicantDocuments::class);
+    }
+
+    /**
+     * One applicant can had multiple files
+     */
+    public function applicationStatus(): BelongsTo
+    {
+        return $this->belongsTo(ApplicationStatus::class, 'application_status_id');
     }
 }

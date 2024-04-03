@@ -2,9 +2,8 @@
 
 namespace App\Livewire;
 
-use App\Events\StepChanged;
 use App\Models\Applicant;
-use App\Models\ApplicantFamily;
+use Illuminate\Support\Carbon;
 use Livewire\Component;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
 use WireUi\Traits\Actions;
@@ -21,7 +20,7 @@ class ApplicantForm extends Component
     public $currStep = 1;
 
     // Define fields for applicant form 
-    public $fullname, $email, $address, $job_id, $info_of_job, $applicant_photo, $birth_place, $birth_date, $gender, $religion, $marital_status, $blood_type, $height, $weight, $ktp_number, $hobby, $home_phone, $cell_phone, $office_phone, $parent_phone, $instagram, $tiktok, $term_and_co;
+    public $fullname, $email, $address, $job_id, $info_of_job, $applicant_photo, $birth_place, $birth_date, $gender, $religion, $marital_status, $blood_type, $height, $weight, $ktp_number, $hobby, $home_phone, $cell_phone, $office_phone, $parent_phone, $instagram, $tiktok, $term_and_co = false;
 
     // Applicant Families Fields
     public $applicantFamilies = [], $f_name, $f_gender, $f_age, $f_last_education, $f_employeer_name, $f_occupation, $f_relation;
@@ -57,18 +56,18 @@ class ApplicantForm extends Component
             'cv' => 'required|mimes:pdf|max:1024',
             'application_letter' => 'required|mimes:pdf|max:1024',
             'ktp' => 'required|mimes:pdf|max:1024',
-            'term_and_co' => 'required',
+            'term_and_co' => 'accepted',
         ], [
             '*.mimes' => 'File must be pdf',
             '*.max' => 'Maximum file size is 1 MB',
-            'term_and_co.required' => 'You must check terms and condition applied!!',
+            'term_and_co.accepted' => 'You must check terms and condition applied!!',
             '*.required' => 'required'
         ]);
 
         // First step create applicant data
         if ($this->applicant_photo) {
             $filename = uniqid() . '_' . $this->applicant_photo->getClientOriginalName();
-            $path = $this->applicant_photo->storeAs('applicant_photos', $filename);
+            $path = $this->applicant_photo->storeAs('applicantPhotos', $filename);
 
             $applicant = Applicant::create([
                 'fullname' => $this->fullname,
@@ -77,6 +76,7 @@ class ApplicantForm extends Component
                 'info_of_job' => $this->info_of_job,
                 'birth_place' => $this->birth_place,
                 'birth_date' => $this->birth_date,
+                'age' => Carbon::parse($this->birth_date)->age,
                 'gender' => $this->gender,
                 'religion' => $this->religion,
                 'marital_status' => $this->marital_status,
@@ -206,9 +206,9 @@ class ApplicantForm extends Component
             // Store file into file storage
             $ijazah_path = $this->ijazah->storeAs('ijazah', $ijazah_filename);
             $cv_path = $this->cv->storeAs('cv', $cv_filename);
-            $application_letter_path = $this->application_letter->storeAs('application_letters', $application_letter_filename);
+            $application_letter_path = $this->application_letter->storeAs('applicationLetters', $application_letter_filename);
             $ktp_path = $this->ktp->storeAs('ktp', $ktp_filename);
-            $transkrip_nilai_path = $this->transkrip_nilai->storeAs('transkrip_nilai', $transkrip_nilai_filename);
+            $transkrip_nilai_path = $this->transkrip_nilai->storeAs('transkripNilai', $transkrip_nilai_filename);
 
             $applicant->applicantDocuments()->create([
                 'ijazah' => $ijazah_path,
@@ -245,14 +245,15 @@ class ApplicantForm extends Component
                     'religion' => 'required',
                     'marital_status' => 'required',
                     'blood_type' => 'required',
-                    'height' => 'required|integer',
-                    'weight' => 'required|integer',
+                    'height' => 'required|regex:/[0-9]/',
+                    'weight' => 'required|regex:/[0-9]/',
                     'ktp_number' => 'required|min:16|max:16|unique:applicants',
                     'hobby' => 'required',
                     'cell_phone' => 'required|min:10|max:13|regex:/[0-9]/',
                     'home_phone' => 'nullable|min:10|max:13|regex:/[0-9]/',
                     'office_phone' => 'nullable|min:10|max:13|regex:/[0-9]/',
                     'parent_phone' => 'required|min:10|max:13|regex:/[0-9]/',
+                    'instagram' => 'required',
                     'applicantFamilies' => 'required',
                 ],
                 [
@@ -263,6 +264,12 @@ class ApplicantForm extends Component
                     '*.required' => 'required!'
                 ]
             );
+        } else if ($this->currStep == 2) {
+            $this->validate([
+                'applicantEducationHistories' => 'required',
+            ], [
+                'applicantEducationHistories.required' => 'Education must be filled!'
+            ]);
         } else if ($this->currStep == 3) {
             $this->validate([
                 'reference_phone_number' => 'nullable|min:10|max:13|regex:/[0-9]/',
@@ -328,7 +335,7 @@ class ApplicantForm extends Component
         $this->validate([
             'company_name' => 'required',
             'company_address' => 'required',
-            'company_phone' => 'required|regex:/[0-9]/|min:11|max:13',
+            'company_phone' => 'required|regex:/[0-9]/|min:10|max:13',
             'latest_position' => 'required',
             'salary' => 'required|regex:/[0-9]/|',
             'direct_spv' => 'required',
@@ -404,7 +411,7 @@ class ApplicantForm extends Component
     {
         $this->f_name = '';
         $this->f_gender = '';
-        $this->f_age = 0;
+        $this->f_age = '';
         $this->f_employeer_name = '';
         $this->f_last_education = '';
         $this->f_occupation = '';
@@ -417,6 +424,7 @@ class ApplicantForm extends Component
             'f_name' => 'required',
             'f_gender' => 'required',
             'f_employeer_name' => 'required',
+            'f_age' => 'required',
             'f_last_education' => 'required',
             'f_occupation' => 'required',
             'f_relation' => 'required',
