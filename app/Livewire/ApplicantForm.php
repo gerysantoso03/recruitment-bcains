@@ -20,7 +20,7 @@ class ApplicantForm extends Component
     public $currStep = 1;
 
     // Define fields for applicant form 
-    public $fullname, $email, $address, $job_id, $info_of_job, $applicant_photo, $birth_place, $birth_date, $gender, $religion, $marital_status, $blood_type, $height, $weight, $ktp_number, $hobby, $home_phone, $cell_phone, $office_phone, $parent_phone, $instagram, $tiktok, $term_and_co = false;
+    public $fullname, $email, $address, $job_id, $job_name, $info_of_job, $applicant_photo, $birth_place, $birth_date, $gender, $religion, $marital_status, $blood_type, $height, $weight, $ktp_number, $hobby, $home_phone, $cell_phone, $office_phone, $parent_phone, $instagram, $tiktok, $term_and_co = false;
 
     // Applicant Families Fields
     public $applicantFamilies = [], $f_name, $f_gender, $f_age, $f_last_education, $f_employeer_name, $f_occupation, $f_relation;
@@ -96,7 +96,7 @@ class ApplicantForm extends Component
                     "tiktok" => $this->tiktok,
                 ]),
                 'applicant_photo' => $path,
-                'job_id' => 1
+                'job_id' => $this->job_id,
             ]);
         }
 
@@ -225,7 +225,7 @@ class ApplicantForm extends Component
             $applicant->save();
         }
 
-        return redirect('/')->with('application-success', 'Application sent successfully!!');
+        return redirect('/home')->with('application-success', 'Application sent successfully!!');
     }
 
     // Validate fields data

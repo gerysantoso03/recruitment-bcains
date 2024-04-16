@@ -28,7 +28,7 @@ Route::get('/register', [AuthController::class, 'registerPage'])->name('register
 Route::get('/logout', [AuthController::class, 'signOut'])->name('logout');
 Route::get('/home', [JobController::class, 'renderAllJobsHome'])->name('home');
 Route::get('/job-detail-applicant/{id}', [JobController::class, 'renderJobDetailApplicant'])->name('job.detail.applicant');
-Route::get('/applicant-form/{id}', [ApplicantController::class, 'renderApplicantForm'])->name('applicant.form');
+Route::get('/applicant-form', [ApplicantController::class, 'renderApplicantForm'])->name('applicant.form');
 
 // Routes Authentication
 Route::get('/login', [AuthController::class, 'loginPage'])->name('login');

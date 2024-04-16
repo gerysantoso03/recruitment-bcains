@@ -33,6 +33,9 @@ class JobController extends Controller
         // Retrieve job detail with given id
         $job = Job::findOrFail($id);
 
+        // Put the job id inside session 
+        session()->put(['job_id' => $job->id, 'job_name' => $job->position_name]);
+
         // Send data to view
         return view('job-detail-applicant', compact('job'));
     }

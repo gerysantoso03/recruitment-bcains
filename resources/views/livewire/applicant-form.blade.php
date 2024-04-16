@@ -12,7 +12,7 @@
                     <x-input wire:model="email" label="Email" corner-hint="Ex: gery@yahoo.com" />
                     <x-input wire:model="address" label="Address"
                         corner-hint="Ex: Jl. Kaliurang No.20, Kebayoran, Jakarta" />
-                    <x-input wire:model="job_id" readonly label="Position Applied" />
+                    <x-input wire:model="job_name" readonly label="Position Applied" />
                     <x-input wire:model="info_of_job" label="Information of Job"
                         corner-hint="Ex: Linkedin, Instagram, Job Street" />
                 </div>

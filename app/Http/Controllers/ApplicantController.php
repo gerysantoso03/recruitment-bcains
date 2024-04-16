@@ -8,13 +8,13 @@ use Illuminate\Http\Request;
 
 class ApplicantController extends Controller
 {
-    public function renderApplicantForm($id)
+    public function renderApplicantForm()
     {
-        // Retrieve job detail with given id
-        $job = Job::findOrFail($id);
+        $job_id = session()->get('job_id');
+        $job_name = session()->get('job_name');
 
         // Send data to view
-        return view('applicant.applicant-form', compact('job'));
+        return view('applicant.applicant-form', ['job_id' => $job_id, 'job_name' => $job_name]);
     }
 
     public function renderApplicantDetail($id)

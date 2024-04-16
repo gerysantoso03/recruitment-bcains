@@ -44,7 +44,7 @@
             <div class="flex flex-col items-center w-2/6 sm:w-2/5">
                 <h4 class="font-bold text-base sm:text-sm md:text-md mb-4 mx-10 sm:mx-6 md:mx-8 my-6 sm:my-2 md:my-4">Do you
                     interested for this job?</h4>
-                <a href="{{ route('applicant.form', $job['id']) }}" target="_blank">
+                <a href="{{ route('applicant.form') }}" target="_blank">
                     <button type="button"
                         class="font-sans text-white w-80 sm:w-52 md:w-64 bg-sky-800 hover:bg-sky-500 focus:ring-2 focus:ring-sky-300 font-md rounded-[4rem] text-base sm:text-sm md:text-md px-5 py-2.5 mx-10 sm:mx-6 md:mx-8 my-6 sm:my-2 md:my-4">I'm
                         Interested</button>
