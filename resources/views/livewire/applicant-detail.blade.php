@@ -1,6 +1,6 @@
-<div class="px-8 py-4 flex gap-4">
+<div class="px-8 py-4 flex gap-4 app-detail">
     {{-- Applicant Information --}}
-    <div class="flex-[1] bg-white rounded-md shadow-md flex flex-col items-center gap-2 py-2">
+    <div class="flex-[1] bg-white rounded-md shadow-md flex flex-col items-center gap-2 py-2 app-detail__box app-detail__box-1">
         {{-- Applicant Photo --}}
         <div class="rounded-full border overflow-hidden w-[10rem] h-[10rem] border flex items-center justify-center">
             <img src="{{ asset($applicantDetail['applicant_photo']) }}" class="object-cover" alt="applicant photo profile">
@@ -193,7 +193,8 @@
         </div>
 
     </div>
-    <div class="flex-[2] flex flex-col bg-white rounded-md shadow-md">
+
+    <div class="flex-[2] flex flex-col bg-white rounded-md shadow-md app-detail__box app-detail__box-2">
         {{-- Applicant Detail Header --}}
         <div class="border-b px-8 flex gap-2 justify-around items-center">
             {{-- Items Header --}}

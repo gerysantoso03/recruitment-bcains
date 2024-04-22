@@ -1,4 +1,4 @@
-<div class="flex flex-col gap-6 bg-sky-100 h-full duration-300 {{ $is_open ? 'w-72' : 'w-28' }} p-5 relative">
+<div class="flex flex-col gap-6 bg-sky-100 h-full duration-300 {{ $is_open ? 'w-72' : 'w-28' }} p-5 relative sidebar">
     <div wire:click="setIsOpen()"
         class="border bg-white w-[2.5rem] h-[2.5rem] rounded-full flex justify-center items-center absolute -right-5 top-10 cursor-pointer">
         <i

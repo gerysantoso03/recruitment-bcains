@@ -36,7 +36,7 @@
     @if (!(Route::currentRouteName() == 'login') && !(Route::currentRouteName() == 'register'))
         @include('layout.global.admin-sidebar')
     @endif
-    <main class="flex flex-col w-full">
+    <main class="flex flex-col">
         @if (!(Route::currentRouteName() == 'login') && !(Route::currentRouteName() == 'register'))
             @include('layout.global.admin-navbar')
         @endif

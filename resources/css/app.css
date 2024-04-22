@@ -57,3 +57,54 @@ img {
         transform: rotate(180deg);
     }
 }
+
+
+body {
+    @apply
+    min-h-screen
+    overflow-x-hidden
+}
+
+main {
+    @apply
+    flex-1
+}
+
+.app-detail__box {
+    @apply
+    h-fit
+}
+
+/* .emp-his-button {
+    @apply
+    bg-[#0269a1]
+    text-white
+    p-0
+    border
+    border-[#0269a1]
+}
+
+.emp-his-button:hover {
+    @apply
+    bg-white
+    text-sky-900
+    transition-all
+    ease-in
+    border
+    border-sky-900
+} */
+
+.emp-his-button {
+    @apply
+    text-sky-900
+}
+
+.emp-his-button--active i {
+    @apply
+    rotate-90
+}
+
+.sidebar {
+    @apply
+    flex-1
+}

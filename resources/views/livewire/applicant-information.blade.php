@@ -371,7 +371,7 @@
             @if ($occupations)
                 @foreach ($occupations as $idx => $occupation)
                     <div class="flex flex-col gap-4 border border-sky-900 rounded-xl p-4" x-data="{ open: false }">
-                        <div class="flex items-center justify-between cursor-pointer" @click="open = !open">
+                        <div class="flex items-center justify-between cursor-pointer emp-his-button" @click="open = !open">
                             <div class="flex-1 flex flex-col">
                                 <p class="text-[1.8rem] text-sky-900 font-semibold">
                                     {{ $occupation['latest_position'] }}
@@ -385,6 +385,13 @@
                                     </p>
                                 </div>
                             </div>
+                            
+                            <template x-if="!open">
+                                <i class="fa-solid fa-caret-down text-sky-800"></i>
+                            </template>
+                            <template x-if="open">
+                                <i class="fa-solid fa-caret-up text-sky-800"></i>
+                            </template>
                         </div>
                         <div class="flex flex-col gap-4" x-transition.delay.50ms
                             x-show.transition.duration.750ms="open" style="display: none;">
